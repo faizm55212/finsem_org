@@ -10,10 +10,27 @@ class AddUser extends StatefulWidget {
 }
 
 class _AddUserState extends State<AddUser> {
-  final TextEditingController _name = TextEditingController();
-  final TextEditingController _email = TextEditingController();
-  final TextEditingController _passwd = TextEditingController();
-  final TextEditingController _add = TextEditingController();
+  TextEditingController? _name;
+  TextEditingController? _email;
+  TextEditingController? _passwd;
+  TextEditingController? _add;
+  @override
+  void initState() {
+    _name = TextEditingController();
+    _email = TextEditingController();
+    _passwd = TextEditingController();
+    _add = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _name!.dispose();
+    _email!.dispose();
+    _passwd!.dispose();
+    _add!.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +69,9 @@ class _AddUserState extends State<AddUser> {
           ),
           TextFormField(
             controller: _passwd,
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.visiblePassword,
+            obscuringCharacter: "*",
+            obscureText: true,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
@@ -66,10 +85,10 @@ class _AddUserState extends State<AddUser> {
                       .httpsCallable('manageUser');
               callable.call(<String, dynamic>{
                 'req': 'add_user',
-                'name': _name.text,
-                'email': _email.text,
-                'add': _add.text,
-                'passwd': _passwd.text,
+                'name': _name!.text,
+                'email': _email!.text,
+                'add': _add!.text,
+                'passwd': _passwd!.text,
                 'org': 'Calc',
                 'oid': 'OU7N0lCaWVxbYssLmM19',
                 'monthly': 100,

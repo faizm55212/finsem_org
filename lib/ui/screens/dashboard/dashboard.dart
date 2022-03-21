@@ -1,4 +1,5 @@
 import 'package:finsem_org/ui/screens/add_user/add_user.dart';
+import 'package:finsem_org/ui/screens/event_screen/event_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -148,9 +149,16 @@ class _DashboardState extends State<Dashboard> {
                                         onPressed: () {},
                                       ),
                                       DashboardOptions(
-                                        title: 'Notice',
+                                        title: 'Events',
                                         asset: "assets/images/profile_pic.jpg",
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const EventsScreen(),
+                                              ));
+                                        },
                                       ),
                                       DashboardOptions(
                                         title: 'Payments',

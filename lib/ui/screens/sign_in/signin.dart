@@ -10,49 +10,52 @@ class SigninCheck extends StatelessWidget {
   Widget build(BuildContext context) {
     final FirebaseAuth auth = FirebaseAuth.instance;
 
-    return StreamBuilder<User?>(
-      stream: auth.authStateChanges(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        } else {
-          if (snapshot.data != null) {
-            // return FutureBuilder(
-            //     future: FirebaseFunctions.instanceFor(region: 'asia-south1')
-            //         .httpsCallable('checkUserExists')
-            //         .call({'email': snapshot.data!.email, 'type': 'org'}),
-            //     builder: (context, AsyncSnapshot<HttpsCallableResult> value) {
-            //       if (value.connectionState == ConnectionState.waiting) {
-            //         return const Center(
-            //           child: CircularProgressIndicator(),
-            //         );
-            //       } else {
-            //         if (value.data!.data == "Organization-Exists") {
-            //           return const Dashboard();
-            //         } else {
-            //           Fluttertoast.showToast(
-            //             msg: "Organization Does Not Exists, Loggin Out!",
-            //             backgroundColor: Colors.red,
-            //             textColor: Colors.white,
-            //           ).then(
-            //             (value) => {
-            //               auth.signOut(),
-            //             },
-            //           );
-            //           return Container();
-            //         }
-            //       }
-            //     });
-            return const Dashboard();
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: StreamBuilder<User?>(
+        stream: auth.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
           } else {
-            return const SigninForm();
+            if (snapshot.data != null) {
+              // return FutureBuilder(
+              //     future: FirebaseFunctions.instanceFor(region: 'asia-south1')
+              //         .httpsCallable('checkUserExists')
+              //         .call({'email': snapshot.data!.email, 'type': 'org'}),
+              //     builder: (context, AsyncSnapshot<HttpsCallableResult> value) {
+              //       if (value.connectionState == ConnectionState.waiting) {
+              //         return const Center(
+              //           child: CircularProgressIndicator(),
+              //         );
+              //       } else {
+              //         if (value.data!.data == "Organization-Exists") {
+              //           return const Dashboard();
+              //         } else {
+              //           Fluttertoast.showToast(
+              //             msg: "Organization Does Not Exists, Loggin Out!",
+              //             backgroundColor: Colors.red,
+              //             textColor: Colors.white,
+              //           ).then(
+              //             (value) => {
+              //               auth.signOut(),
+              //             },
+              //           );
+              //           return Container();
+              //         }
+              //       }
+              //     });
+              return const Dashboard();
+            } else {
+              return const SigninForm();
+            }
           }
-        }
-      },
+        },
+      ),
     );
   }
 }
@@ -117,6 +120,7 @@ class _SigninFormState extends State<SigninForm> {
                   password: _psswdController!.text,
                 );
               } on FirebaseAuthException catch (e) {
+                // ignore: avoid_print
                 print(e);
                 Fluttertoast.showToast(msg: 'e');
               }
