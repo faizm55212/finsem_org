@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:finsem_org/ui/component/svg_icon.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:finsem_org/ui/component/dashboard_options.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -16,11 +18,17 @@ class _DashboardState extends State<Dashboard> {
   double _height = 60.h;
   double _radius = 0;
   bool _expanded = false;
+  bool _visible = false;
   void expand() {
-    _expanded ? _height = 750.h : _height = 60.h;
-    _expanded ? _radius = 30.h : _radius = 0.h;
     setState(() {
       _expanded = !_expanded;
+      _expanded ? _height = 750.h : _height = 60.h;
+      _expanded ? _radius = 30.h : _radius = 0.h;
+      Future.delayed(const Duration(milliseconds: 500)).then((value) {
+        setState(() {
+          _visible = !_visible;
+        });
+      });
     });
   }
 
@@ -63,18 +71,13 @@ class _DashboardState extends State<Dashboard> {
                       },
                       child: const Text('Add User'),
                     ),
-                    TextButton(
-                      onPressed: () {
-                        FirebaseAuth.instance.signOut();
-                      },
-                      child: const Text(
-                        'Sign out',
-                      ),
-                    ),
                   ],
                 ),
               ),
               AnimatedContainer(
+                padding: _visible
+                    ? EdgeInsets.only(right: 20.w, left: 20.w, top: 20.h)
+                    : EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
                 height: _height,
                 width: 360.w,
                 decoration: BoxDecoration(
@@ -86,46 +89,131 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 duration: const Duration(seconds: 1),
                 curve: Curves.linearToEaseOut,
-                child: Container(
-                  padding: EdgeInsets.only(right: 20.w, left: 20.w, top: 15.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SvgIcon(
-                            color: 0xffffffff,
-                            assetPath: "assets/icon/menu-dots.svg",
-                            size: 25,
-                            onPressed: expand,
-                          ),
-                          SizedBox(width: 20.w),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                "Dhiraj Gupta",
-                                style: TextStyle(
-                                    fontSize: 18, color: Colors.white),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SvgIcon(
+                              color: 0xffffffff,
+                              assetPath: "assets/icon/menu-dots.svg",
+                              size: 25,
+                              onPressed: expand,
+                            ),
+                            SizedBox(width: 20.w),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                Text(
+                                  "Dhiraj Gupta",
+                                  style: TextStyle(
+                                      fontSize: 18, color: Colors.white),
+                                ),
+                                Text(
+                                  "Tower1  1304",
+                                  style: TextStyle(
+                                      fontSize: 13, color: Colors.white),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        const CircleAvatar(
+                          radius: 20, // Image radius
+                          backgroundImage:
+                              AssetImage("assets/images/profile_pic.jpg"),
+                        ),
+                      ],
+                    ),
+                    Visibility(
+                      visible: _visible,
+                      child: _height == 750.h
+                          ? Container(
+                              margin: EdgeInsets.symmetric(vertical: 30.h),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      DashboardOptions(
+                                        title: 'Dashboard',
+                                        asset: "assets/images/profile_pic.jpg",
+                                        onPressed: () {},
+                                      ),
+                                      DashboardOptions(
+                                        title: 'Notice',
+                                        asset: "assets/images/profile_pic.jpg",
+                                        onPressed: () {},
+                                      ),
+                                      DashboardOptions(
+                                        title: 'Payments',
+                                        asset: "assets/images/profile_pic.jpg",
+                                        onPressed: () {},
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: const [
+                                      DashboardOptions(
+                                          title: 'Fee Details',
+                                          asset:
+                                              "assets/images/profile_pic.jpg"),
+                                      DashboardOptions(
+                                          title: 'Examination',
+                                          asset:
+                                              "assets/images/profile_pic.jpg"),
+                                      DashboardOptions(
+                                          title: 'Report Card',
+                                          asset:
+                                              "assets/images/profile_pic.jpg"),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: const [
+                                      DashboardOptions(
+                                          title: 'Calendar',
+                                          asset:
+                                              "assets/images/profile_pic.jpg"),
+                                      DashboardOptions(
+                                          title: 'Multimedia',
+                                          asset:
+                                              "assets/images/profile_pic.jpg"),
+                                      DashboardOptions(
+                                          title: 'Payments',
+                                          asset:
+                                              "assets/images/profile_pic.jpg"),
+                                    ],
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      FirebaseAuth.instance.signOut();
+                                    },
+                                    child: Text(
+                                      'Sign out',
+                                      style: GoogleFonts.roboto(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                "Tower1  1304",
-                                style: TextStyle(
-                                    fontSize: 13, color: Colors.white),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                      const CircleAvatar(
-                        radius: 20, // Image radius
-                        backgroundImage:
-                            AssetImage("assets/images/profile_pic.jpg"),
-                      ),
-                    ],
-                  ),
+                            )
+                          : Container(),
+                    )
+                  ],
                 ),
               ),
             ],

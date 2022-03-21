@@ -1,6 +1,5 @@
 import 'package:finsem_org/ui/screens/dashboard/dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
