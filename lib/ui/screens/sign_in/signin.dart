@@ -23,33 +23,30 @@ class SigninCheck extends StatelessWidget {
             );
           } else {
             if (snapshot.data != null) {
-              // return FutureBuilder(
-              //     future: FirebaseFunctions.instanceFor(region: 'asia-south1')
-              //         .httpsCallable('checkUserExists')
-              //         .call({'email': snapshot.data!.email, 'type': 'org'}),
-              //     builder: (context, AsyncSnapshot<HttpsCallableResult> value) {
-              //       if (value.connectionState == ConnectionState.waiting) {
-              //         return const Center(
-              //           child: CircularProgressIndicator(),
-              //         );
-              //       } else {
-              //         if (value.data!.data == "Organization-Exists") {
-              //           return const Dashboard();
-              //         } else {
-              //           Fluttertoast.showToast(
-              //             msg: "Organization Does Not Exists, Loggin Out!",
-              //             backgroundColor: Colors.red,
-              //             textColor: Colors.white,
-              //           ).then(
-              //             (value) => {
-              //               auth.signOut(),
-              //             },
-              //           );
-              //           return Container();
-              //         }
-              //       }
-              //     });
-              return const Dashboard();
+              return FutureBuilder<IdTokenResult>(
+                  future: snapshot.data!.getIdTokenResult(),
+                  builder: (context, AsyncSnapshot<IdTokenResult> value) {
+                    if (value.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      if (value.data!.claims!['manager'] == true) {
+                        return const Dashboard();
+                      } else {
+                        Fluttertoast.showToast(
+                          msg: "Organization Does Not Exists, Loggin Out!",
+                          backgroundColor: Colors.red.shade700,
+                          textColor: Colors.white,
+                        ).then(
+                          (value) => {
+                            auth.signOut(),
+                          },
+                        );
+                      }
+                      return Container();
+                    }
+                  });
             } else {
               return const SigninForm();
             }
