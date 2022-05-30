@@ -20,7 +20,7 @@ class DashboardOptions extends StatelessWidget {
       onTap: onPressed,
       child: SizedBox(
         height: 140.h,
-        width: 100.w,
+        width: 105.w,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

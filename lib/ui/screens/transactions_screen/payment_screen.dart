@@ -1,6 +1,7 @@
 import 'package:finsem_org/ui/component/curved_appbar.dart';
 import 'package:finsem_org/ui/screens/transactions_screen/crowdFunding/crowdfunding_payment_screen.dart';
 import 'package:finsem_org/ui/screens/transactions_screen/history/history_payment_screen.dart';
+import 'package:finsem_org/ui/screens/transactions_screen/pending/pending_payment_screen.dart';
 import 'package:finsem_org/utils/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,7 +20,7 @@ class _PaymentScreenState extends State<PaymentScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -59,7 +60,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                   Tab(
                     child: Container(
                       height: 32,
-                      width: 140,
+                      width: 95,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
@@ -67,7 +68,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                       child: Align(
                         alignment: Alignment.center,
                         child: Text(
-                          "CROWDFUNDING",
+                          "HISTORY",
                           style: GoogleFonts.quicksand(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -79,7 +80,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                   Tab(
                     child: Container(
                       height: 32,
-                      width: 80,
+                      width: 95,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
@@ -87,7 +88,27 @@ class _PaymentScreenState extends State<PaymentScreen>
                       child: Align(
                         alignment: Alignment.center,
                         child: Text(
-                          "HISTORY",
+                          "PENDING",
+                          style: GoogleFonts.quicksand(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Tab(
+                    child: Container(
+                      height: 32,
+                      width: 115,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                              color: FinColours.mainColor, width: 2)),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "DONATION",
                           style: GoogleFonts.quicksand(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -106,8 +127,9 @@ class _PaymentScreenState extends State<PaymentScreen>
               child: TabBarView(
                 controller: _tabController,
                 children: const [
-                  CrowdfundingPaymentScreen(),
                   HistoryPaymentScreen(),
+                  PendingPaymentScreen(),
+                  CrowdfundingPaymentScreen(),
                 ],
               ),
             ),

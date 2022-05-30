@@ -1,6 +1,12 @@
+import 'package:finsem_org/ui/screens/add_notice/add_notice.dart';
 import 'package:finsem_org/ui/screens/add_user/add_user.dart';
 import 'package:finsem_org/ui/screens/event_screen/event_screen.dart';
+import 'package:finsem_org/ui/screens/housekeeping/housekeeping.dart';
+import 'package:finsem_org/ui/screens/services/services.dart';
+import 'package:finsem_org/ui/screens/tickets/tickets.dart';
+import 'package:finsem_org/ui/screens/transactions_screen/payment_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -107,18 +113,23 @@ class _DashboardState extends State<Dashboard> {
                             ),
                             SizedBox(width: 20.w),
                             Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
+                                SizedBox(
+                                  height: 4,
+                                ),
                                 Text(
-                                  "Dhiraj Gupta",
+                                  //TODO: add org name from firebase
+                                  "Prince Town",
                                   style: TextStyle(
                                       fontSize: 18, color: Colors.white),
                                 ),
-                                Text(
-                                  "Tower1  1304",
-                                  style: TextStyle(
-                                      fontSize: 13, color: Colors.white),
-                                )
+                                // Text(
+                                //   "Tower1  1304",
+                                //   style: TextStyle(
+                                //       fontSize: 13, color: Colors.white),
+                                // )
                               ],
                             ),
                           ],
@@ -139,18 +150,29 @@ class _DashboardState extends State<Dashboard> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
+                                  SizedBox(
+                                    height: 30.h,
+                                  ),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       DashboardOptions(
-                                        title: 'Dashboard',
-                                        asset: "assets/images/profile_pic.jpg",
-                                        onPressed: () {},
+                                        title: 'Add User',
+                                        asset: "assets/images/addUser.png",
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const AddUser(),
+                                            ),
+                                          );
+                                        },
                                       ),
                                       DashboardOptions(
                                         title: 'Events',
-                                        asset: "assets/images/profile_pic.jpg",
+                                        asset: "assets/images/events.png",
                                         onPressed: () {
                                           Navigator.push(
                                               context,
@@ -161,46 +183,79 @@ class _DashboardState extends State<Dashboard> {
                                         },
                                       ),
                                       DashboardOptions(
-                                        title: 'Payments',
-                                        asset: "assets/images/profile_pic.jpg",
-                                        onPressed: () {},
+                                        title: 'Notice',
+                                        asset: "assets/images/notice.png",
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const AddNotice(),
+                                              ));
+                                        },
                                       ),
                                     ],
                                   ),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
-                                    children: const [
+                                    children: [
                                       DashboardOptions(
-                                          title: 'Fee Details',
-                                          asset:
-                                              "assets/images/profile_pic.jpg"),
+                                        title: 'Payments',
+                                        asset: "assets/images/payments.png",
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const PaymentScreen(),
+                                              ));
+                                          //PaymentScreen
+                                        },
+                                      ),
                                       DashboardOptions(
-                                          title: 'Examination',
-                                          asset:
-                                              "assets/images/profile_pic.jpg"),
+                                        title: 'Tickets',
+                                        asset: "assets/images/tickets.png",
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const TicketsScreen(),
+                                              ));
+                                        },
+                                      ),
+
+                                      //TicketsScreen
                                       DashboardOptions(
-                                          title: 'Report Card',
-                                          asset:
-                                              "assets/images/profile_pic.jpg"),
+                                        title: 'Services',
+                                        asset: "assets/images/service.png",
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const ServicesScreen(),
+                                              ));
+                                        },
+                                      ),
                                     ],
                                   ),
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: const [
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
                                       DashboardOptions(
-                                          title: 'Calendar',
-                                          asset:
-                                              "assets/images/profile_pic.jpg"),
-                                      DashboardOptions(
-                                          title: 'Multimedia',
-                                          asset:
-                                              "assets/images/profile_pic.jpg"),
-                                      DashboardOptions(
-                                          title: 'Payments',
-                                          asset:
-                                              "assets/images/profile_pic.jpg"),
+                                        title: 'Housekeeping',
+                                        asset: "assets/images/housekeeping.png",
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const HousekeepingScreen(),
+                                              ));
+                                        },
+                                      ),
                                     ],
                                   ),
                                   TextButton(

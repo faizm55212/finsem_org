@@ -1,3 +1,4 @@
+import 'package:finsem_org/ui/component/dummy.dart';
 import 'package:finsem_org/utils/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +12,7 @@ class HistoryPaymentScreen extends StatelessWidget {
       color: FinColours.secondaryColor,
       child: Center(
         child: ListView.builder(
-            itemCount: 9,
+            itemCount: DummyData().paymentHistory.length,
             itemBuilder: (BuildContext context, int index) {
               return Column(
                 children: [
@@ -24,26 +25,52 @@ class HistoryPaymentScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       color: FinColours.transactionBackground4,
                     ),
-                    height: 80,
+                    height: 120,
                     width: 300.w,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        //TODO:FIREBASE CONNECTION PAYMENT HISTORY
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Maintenance Feb",
+                              //Name of sender
+                              DummyData().paymentHistory[index].senderName,
                               style: TextStyle(
-                                  color: FinColours.grey, fontSize: 18),
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              "₹ 14,000",
+                              //room
+                              DummyData().paymentHistory[index].blockRoom,
                               style: TextStyle(
                                   color: FinColours.secondaryTextColor,
-                                  fontSize: 24),
+                                  fontSize: 14),
+                            ),
+                            Text(
+                              //purpose
+                              DummyData().paymentHistory[index].purpose,
+                              style: TextStyle(
+                                  color: FinColours.secondaryTextColor,
+                                  fontSize: 14),
+                            ),
+                            Text(
+                              //trx date
+                              DummyData().paymentHistory[index].dateTime,
+                              style: TextStyle(
+                                  color: FinColours.secondaryTextColor,
+                                  fontSize: 14),
+                            ),
+                            Text(
+                              //trx id
+                              DummyData().paymentHistory[index].trxID,
+                              style: TextStyle(
+                                  color: FinColours.secondaryTextColor,
+                                  fontSize: 14),
                             ),
                           ],
                         ),
@@ -51,15 +78,10 @@ class HistoryPaymentScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Paid",
-                              style: TextStyle(
-                                  color: FinColours.green, fontSize: 18),
-                            ),
-                            Text(
-                              "16 Feb",
+                              DummyData().paymentHistory[index].amount,
                               style: TextStyle(
                                   color: FinColours.secondaryTextColor,
-                                  fontSize: 18),
+                                  fontSize: 24),
                             ),
                           ],
                         ),

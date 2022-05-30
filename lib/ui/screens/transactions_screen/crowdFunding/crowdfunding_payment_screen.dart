@@ -1,3 +1,4 @@
+import 'package:finsem_org/ui/component/dummy.dart';
 import 'package:finsem_org/utils/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +11,7 @@ class CrowdfundingPaymentScreen extends StatelessWidget {
     return Container(
       color: FinColours.secondaryColor,
       child: ListView.builder(
-          itemCount: 3,
+          itemCount: DummyData().paymentDonation.length,
           itemBuilder: (BuildContext context, int index) {
             return Column(
               children: [
@@ -23,26 +24,52 @@ class CrowdfundingPaymentScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     color: FinColours.transactionBackground3,
                   ),
-                  height: 80,
+                  height: 120,
                   width: 300.w,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          //TODO:FIREBASE CONNECTION DONATION RECIEVED
                           Text(
-                            "Smile Foundation",
-                            style:
-                                TextStyle(color: FinColours.grey, fontSize: 16),
+                            //Name of sender
+                            DummyData().paymentDonation[index].pName,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "₹ 100",
+                            //room
+                            DummyData().paymentDonation[index].blockRoom,
                             style: TextStyle(
                                 color: FinColours.secondaryTextColor,
-                                fontSize: 24),
+                                fontSize: 14),
+                          ),
+                          Text(
+                            //purpose
+                            DummyData().paymentDonation[index].purpose,
+                            style: TextStyle(
+                                color: FinColours.secondaryTextColor,
+                                fontSize: 14),
+                          ),
+                          Text(
+                            //trx date
+                            "25/05/2022 10:20 PM",
+                            style: TextStyle(
+                                color: FinColours.secondaryTextColor,
+                                fontSize: 14),
+                          ),
+                          Text(
+                            //trx id
+                            "ID : " + "IB123564895",
+                            style: TextStyle(
+                                color: FinColours.secondaryTextColor,
+                                fontSize: 14),
                           ),
                         ],
                       ),
@@ -50,15 +77,21 @@ class CrowdfundingPaymentScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Due",
-                            style:
-                                TextStyle(color: FinColours.red, fontSize: 18),
+                            "₹ " + DummyData().paymentHistory[index].amount,
+                            style: TextStyle(
+                                color: FinColours.secondaryTextColor,
+                                fontSize: 24),
                           ),
-                          Text(
-                            "14 Mar",
-                            style:
-                                TextStyle(color: FinColours.red, fontSize: 18),
-                          ),
+                          // Text(
+                          //   "Due",
+                          //   style:
+                          //       TextStyle(color: FinColours.red, fontSize: 18),
+                          // ),
+                          // Text(
+                          //   "14 Mar",
+                          //   style:
+                          //       TextStyle(color: FinColours.red, fontSize: 18),
+                          // ),
                         ],
                       ),
                     ],

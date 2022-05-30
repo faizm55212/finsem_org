@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         title: 'FinSEM_org',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.grey,
         ),
         home: const SigninCheck(),
       ),

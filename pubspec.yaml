@@ -21,6 +21,7 @@ dependencies:
   get: ^4.6.1
   firebase_app_check: ^0.0.6+7
   flutter_svg: ^1.0.3
+  url_launcher: ^6.1.2
 
 dev_dependencies:
   flutter_test:
