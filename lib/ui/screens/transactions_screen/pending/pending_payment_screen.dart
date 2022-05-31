@@ -14,6 +14,7 @@ class PendingPaymentScreen extends StatelessWidget {
       color: FinColours.secondaryColor,
       child: Center(
         child: ListView.builder(
+            physics: BouncingScrollPhysics(),
             itemCount: DummyData().paymentPending.length,
             itemBuilder: (BuildContext context, int index) {
               return Column(
@@ -121,10 +122,12 @@ class PendingPaymentScreen extends StatelessWidget {
                                         .paymentPending[index]
                                         .number,
                                     queryParameters: {
-                                      'body': 'Payment Pending of amount' +
-                                          DummyData()
-                                              .paymentPending[index]
-                                              .amount
+                                      'body':
+                                          'Payment of maintenance is Pending of amount ' +
+                                              DummyData()
+                                                  .paymentPending[index]
+                                                  .amount +
+                                              " Please pay it immediately."
                                     });
                                 await launchUrl(launchUri);
                               },

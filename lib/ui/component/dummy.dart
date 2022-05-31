@@ -122,35 +122,50 @@ class DummyData {
   ].obs;
   RxList paymentDonation = [
     PaymentDonation(
-        purpose: "Donation",
-        blockRoom: "Tower 4 - 903",
-        number: "9614035474",
-        amount: "2000",
-        pName: "Dheeraj Gupta"),
+      purpose: "Donation",
+      blockRoom: "Tower 4 - 903",
+      number: "9614035474",
+      amount: "2000",
+      pName: "Dheeraj Gupta",
+      dateTime: "22/04/2022 09:28 AM",
+      trxID: "TX1236541353765029",
+    ),
     PaymentDonation(
-        purpose: "Donation",
-        blockRoom: "Tower 2 - 1502",
-        number: "8691540312",
-        amount: "8000",
-        pName: "Tanweer Hussain"),
+      purpose: "Donation",
+      blockRoom: "Tower 2 - 1502",
+      number: "8691540312",
+      amount: "8000",
+      pName: "Tanweer Hussain",
+      dateTime: "21/04/2022 10:42 AM",
+      trxID: "TX1235641358795642",
+    ),
     PaymentDonation(
-        purpose: "Donation",
-        blockRoom: "Tower 1 - 101",
-        number: "723489065",
-        amount: "4000",
-        pName: "Manish Gogoi"),
+      purpose: "Donation",
+      blockRoom: "Tower 1 - 101",
+      number: "723489065",
+      amount: "4000",
+      pName: "Manish Gogoi",
+      dateTime: "22/04/2022 12:31 PM",
+      trxID: "TX12457641356781122",
+    ),
     PaymentDonation(
-        purpose: "Donation",
-        blockRoom: "Tower 1 - 1702",
-        number: "9895035480",
-        amount: "6000",
-        pName: "Diganta Das"),
+      purpose: "Donation",
+      blockRoom: "Tower 1 - 1702",
+      number: "9895035480",
+      amount: "6000",
+      pName: "Diganta Das",
+      dateTime: "23/04/2022 09:22 AM",
+      trxID: "TX1242362034152265",
+    ),
     PaymentDonation(
-        purpose: "Donation",
-        blockRoom: "Tower 5 - 303",
-        number: "9987045075",
-        amount: "4000",
-        pName: "Dheeraj Gupta"),
+      purpose: "Donation",
+      blockRoom: "Tower 5 - 303",
+      number: "9987045075",
+      amount: "4000",
+      pName: "Billu Sanda",
+      dateTime: "23/04/2022 07:54 AM",
+      trxID: "TX124231342668496",
+    ),
   ].obs;
 }
 
@@ -160,14 +175,17 @@ class PaymentDonation {
   final String purpose;
   final String number;
   final String amount;
+  final String dateTime;
+  final String trxID;
 
-  PaymentDonation({
-    required this.purpose,
-    required this.blockRoom,
-    required this.number,
-    required this.amount,
-    required this.pName,
-  });
+  PaymentDonation(
+      {required this.purpose,
+      required this.blockRoom,
+      required this.number,
+      required this.amount,
+      required this.pName,
+      required this.dateTime,
+      required this.trxID});
 }
 
 class PaymentPending {
