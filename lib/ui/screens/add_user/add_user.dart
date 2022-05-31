@@ -1,5 +1,4 @@
 import 'package:finsem_org/ui/component/curved_appbar.dart';
-import 'package:finsem_org/ui/screens/dashboard/dashboard.dart';
 import 'package:finsem_org/utils/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_functions/cloud_functions.dart';
@@ -23,7 +22,6 @@ class _AddUserState extends State<AddUser> {
   TextEditingController? _occupation;
   TextEditingController? _email;
   TextEditingController? _passwd;
-  TextEditingController? _add;
   @override
   void initState() {
     _name = TextEditingController();
@@ -35,7 +33,6 @@ class _AddUserState extends State<AddUser> {
     _occupation = TextEditingController();
     _email = TextEditingController();
     _passwd = TextEditingController();
-    _add = TextEditingController();
     super.initState();
   }
 
@@ -50,7 +47,6 @@ class _AddUserState extends State<AddUser> {
     _occupation!.dispose();
     _email!.dispose();
     _passwd!.dispose();
-    _add!.dispose();
     super.dispose();
   }
 
@@ -60,56 +56,56 @@ class _AddUserState extends State<AddUser> {
       barrierDismissible: true, // user can tap anywhere to close the pop up
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('User Added'),
+          title: const Text('User Detail'),
           content: SingleChildScrollView(
             child: Column(
               children: <Widget>[
                 Align(
                     alignment: Alignment.topLeft,
                     child: Text("Name: " + _name!.text,
-                        style: TextStyle(fontWeight: FontWeight.w700))),
+                        style: const TextStyle(fontWeight: FontWeight.w700))),
                 const SizedBox(
                   height: 10,
                 ),
                 Align(
                     alignment: Alignment.topLeft,
                     child: Text("Age: " + _age!.text + " " + _genderValue,
-                        style: TextStyle(fontWeight: FontWeight.w700))),
+                        style: const TextStyle(fontWeight: FontWeight.w700))),
                 const SizedBox(
                   height: 10,
                 ),
                 Align(
                     alignment: Alignment.topLeft,
                     child: Text("Mobile No: " + _mobileNo!.text,
-                        style: TextStyle(fontWeight: FontWeight.w700))),
+                        style: const TextStyle(fontWeight: FontWeight.w700))),
                 const SizedBox(
                   height: 10,
                 ),
                 Align(
                     alignment: Alignment.topLeft,
                     child: Text("Email: " + _email!.text,
-                        style: TextStyle(fontWeight: FontWeight.w700))),
+                        style: const TextStyle(fontWeight: FontWeight.w700))),
                 const SizedBox(
                   height: 10,
                 ),
                 Align(
                     alignment: Alignment.topLeft,
                     child: Text(_block!.text + "  " + _flatNo!.text,
-                        style: TextStyle(fontWeight: FontWeight.w700))),
+                        style: const TextStyle(fontWeight: FontWeight.w700))),
                 const SizedBox(
                   height: 10,
                 ),
                 Align(
                     alignment: Alignment.topLeft,
                     child: Text(_occupation!.text,
-                        style: TextStyle(fontWeight: FontWeight.w700))),
+                        style: const TextStyle(fontWeight: FontWeight.w700))),
                 const SizedBox(
                   height: 10,
                 ),
                 Align(
                     alignment: Alignment.topLeft,
                     child: Text(_idTypeValue + " No: " + _idNo!.text,
-                        style: TextStyle(fontWeight: FontWeight.w700))),
+                        style: const TextStyle(fontWeight: FontWeight.w700))),
                 const SizedBox(
                   height: 10,
                 ),
@@ -124,22 +120,52 @@ class _AddUserState extends State<AddUser> {
                   style: TextButton.styleFrom(
                     primary: Colors.white,
                     backgroundColor: Colors.grey,
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                        borderRadius: BorderRadius.all(Radius.circular(40))),
                   ),
                   child: const Text('Go to Home'),
                   onPressed: () {
-                    // FocusScope.of(context)
-                    //     .unfocus(); // unfocus last selected input field
-                    //Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Dashboard(),
-                      ),
-                    ); // Empty the form fields
-                    setState(() {});
+                    Navigator.pop(context);
+                    Navigator.pop(context);
                   }, // so the alert dialog is closed when navigating back to main page
+                ),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    primary: Colors.white,
+                    backgroundColor: Colors.red,
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(40))),
+                  ),
+                  child: const Text('Submit'),
+                  onPressed: () {
+                    HttpsCallable callable =
+                        FirebaseFunctions.instanceFor(region: 'asia-south1')
+                            .httpsCallable('manageUser');
+                    callable.call(<String, dynamic>{
+                      'req': 'add_user',
+                      'email': _email!.text,
+                      'passwd': _passwd!.text,
+                      'name': _name!.text,
+                      'age': _age!.text,
+                      'gender': _genderValue,
+                      'mobile': _mobileNo!.text,
+                      'block': _block!.text,
+                      'flatNo': _flatNo!.text,
+                      'idType': _idTypeValue,
+                      'idNo': _idNo!.text,
+                      'occupation': _occupation!.text,
+                      'org': 'Calc',
+                      'oid': 'OU7N0lCaWVxbYssLmM19',
+                      'monthly': 100,
+                      'pending': 15
+                    }).then((value) {
+                      Fluttertoast.showToast(msg: value.data.toString());
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                    });
+                  },
                 ),
               ],
             )
@@ -169,102 +195,87 @@ class _AddUserState extends State<AddUser> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 15.h,
-              ),
-              SizedBox(
-                child: TextFormField(
-                  controller: _name,
-                  keyboardType: TextInputType.text,
-                  textCapitalization: TextCapitalization.words,
-                  decoration: InputDecoration(
-                    labelText: "Name",
-                    hintText: 'Name',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+              SizedBox(height: 15.h),
+              TextFormField(
+                controller: _name,
+                keyboardType: TextInputType.text,
+                textCapitalization: TextCapitalization.words,
+                decoration: InputDecoration(
+                  labelText: "Name",
+                  hintText: 'Name',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      width: 165.w,
-                      child: TextFormField(
-                        controller: _age,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          labelText: "Age",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+              SizedBox(height: 10.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 165.w,
+                    child: TextFormField(
+                      controller: _age,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: "Age",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: 165.w,
-                      height: 55.h,
-                      child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                                color: Colors.black38,
-                                width: 1), //border of dropdown button
-                            borderRadius: BorderRadius.circular(
-                                20), //border raiuds of dropdown button
-                          ),
-                          child: Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
-                              child: DropdownButton(
-                                value: _genderValue,
+                  ),
+                  SizedBox(
+                    width: 165.w,
+                    height: 55.h,
+                    child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                              color: Colors.black38,
+                              width: 1), //border of dropdown button
+                          borderRadius: BorderRadius.circular(
+                              20), //border raiuds of dropdown button
+                        ),
+                        child: Padding(
+                            padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
+                            child: DropdownButton(
+                              value: _genderValue,
 
-                                items: gender.map((String items) {
-                                  return DropdownMenuItem(
-                                    value: items,
-                                    child: Text(items),
-                                  );
-                                }).toList(),
+                              items: gender.map((String items) {
+                                return DropdownMenuItem(
+                                  value: items,
+                                  child: Text(items),
+                                );
+                              }).toList(),
 
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    _genderValue = newValue!;
-                                  });
-                                }, //dropdown background color
-                                underline: Container(),
-                                isExpanded: true,
-                                icon: const Padding(
-                                    padding: EdgeInsets.only(left: 30),
-                                    child: Icon(
-                                        Icons.keyboard_arrow_down_rounded)),
-                              ))),
-                    )
-                  ],
-                ),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  _genderValue = newValue!;
+                                });
+                              }, //dropdown background color
+                              underline: Container(),
+                              isExpanded: true,
+                              icon: const Padding(
+                                  padding: EdgeInsets.only(left: 30),
+                                  child:
+                                      Icon(Icons.keyboard_arrow_down_rounded)),
+                            ))),
+                  )
+                ],
               ),
-              SizedBox(
-                height: 10.h,
-              ),
-              SizedBox(
-                //width: 165.w,
-                child: TextFormField(
-                  controller: _mobileNo,
-                  keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(
-                    labelText: "Mobile Number",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+              SizedBox(height: 10.h),
+              TextFormField(
+                controller: _mobileNo,
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  labelText: "Mobile Number",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10.h,
-              ),
+              SizedBox(height: 10.h),
               TextFormField(
                 controller: _email,
                 keyboardType: TextInputType.emailAddress,
@@ -275,121 +286,108 @@ class _AddUserState extends State<AddUser> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      width: 165.w,
-                      child: TextFormField(
-                        controller: _block,
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                          labelText: "Block",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+              SizedBox(height: 10.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 165.w,
+                    child: TextFormField(
+                      controller: _block,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        labelText: "Block",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: 165.w,
-                      child: TextFormField(
-                        controller: _flatNo,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          labelText: "Flat No",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                  ),
+                  SizedBox(
+                    width: 165.w,
+                    child: TextFormField(
+                      controller: _flatNo,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: "Flat No",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 10.h,
-              ),
-              SizedBox(
-                child: TextFormField(
-                  controller: _occupation,
-                  keyboardType: TextInputType.text,
-                  textCapitalization: TextCapitalization.words,
-                  decoration: InputDecoration(
-                    labelText: "Occupation",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+              SizedBox(height: 10.h),
+              TextFormField(
+                controller: _occupation,
+                keyboardType: TextInputType.text,
+                textCapitalization: TextCapitalization.words,
+                decoration: InputDecoration(
+                  labelText: "Occupation",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      width: 165.w,
-                      height: 55.h,
-                      child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                                color: Colors.black38,
-                                width: 1), //border of dropdown button
-                            borderRadius: BorderRadius.circular(
-                                20), //border raiuds of dropdown button
-                          ),
-                          child: Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
-                              child: DropdownButton(
-                                value: _idTypeValue,
+              SizedBox(height: 10.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 165.w,
+                    height: 55.h,
+                    child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                              color: Colors.black38,
+                              width: 1), //border of dropdown button
+                          borderRadius: BorderRadius.circular(
+                              20), //border raiuds of dropdown button
+                        ),
+                        child: Padding(
+                            padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
+                            child: DropdownButton(
+                              borderRadius: BorderRadius.circular(10),
+                              value: _idTypeValue,
 
-                                items: idType.map((String items) {
-                                  return DropdownMenuItem(
-                                    value: items,
-                                    child: Text(items),
-                                  );
-                                }).toList(),
+                              items: idType.map((String items) {
+                                return DropdownMenuItem(
+                                  value: items,
+                                  child: Text(items),
+                                );
+                              }).toList(),
 
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    _idTypeValue = newValue!;
-                                  });
-                                }, //dropdown background color
-                                underline: Container(),
-                                isExpanded: true,
-                                icon: Padding(
-                                    padding: EdgeInsets.only(left: 30),
-                                    child: Icon(
-                                        Icons.keyboard_arrow_down_rounded)),
-                              ))),
-                    ),
-                    SizedBox(
-                      width: 165.w,
-                      child: TextFormField(
-                        controller: _idNo,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          labelText: "ID Number",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  _idTypeValue = newValue!;
+                                });
+                              }, //dropdown background color
+                              underline: Container(),
+                              isExpanded: true,
+                              icon: const Padding(
+                                  padding: EdgeInsets.only(left: 30),
+                                  child:
+                                      Icon(Icons.keyboard_arrow_down_rounded)),
+                            ))),
+                  ),
+                  SizedBox(
+                    width: 165.w,
+                    child: TextFormField(
+                      controller: _idNo,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: "ID Number",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 10.h,
-              ),
+              SizedBox(height: 10.h),
               TextFormField(
                 controller: _passwd,
                 keyboardType: TextInputType.visiblePassword,
@@ -402,9 +400,7 @@ class _AddUserState extends State<AddUser> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 40.h,
-              ),
+              SizedBox(height: 40.h),
               MaterialButton(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18.0),
@@ -427,23 +423,6 @@ class _AddUserState extends State<AddUser> {
                 ),
                 onPressed: () {
                   _submit();
-                  //print(_genderValue);
-                  //TODO: UPDATE POST METHOD OF ADD USER
-                  // HttpsCallable callable =
-                  //     FirebaseFunctions.instanceFor(region: 'asia-south1')
-                  //         .httpsCallable('manageUser');
-                  // callable.call(<String, dynamic>{
-                  //   'req': 'add_user',
-                  //   'name': _name!.text,
-                  //   'email': _email!.text,
-                  //   'add': _add!.text,
-                  //   'passwd': _passwd!.text,
-                  //   'org': 'Calc',
-                  //   'oid': 'OU7N0lCaWVxbYssLmM19',
-                  //   'monthly': 100,
-                  //   'pending': 15
-                  // }).then((value) =>
-                  //     Fluttertoast.showToast(msg: value.data.toString()));
                 },
               ),
             ],

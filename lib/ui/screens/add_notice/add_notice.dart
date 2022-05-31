@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:finsem_org/ui/component/curved_appbar.dart';
 import 'package:finsem_org/utils/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:developer' as debug;
 
 class AddNotice extends StatefulWidget {
   const AddNotice({Key? key}) : super(key: key);
@@ -13,6 +18,8 @@ class AddNotice extends StatefulWidget {
 class _AddNoticeState extends State<AddNotice> {
   TextEditingController? _noticeName;
   TextEditingController? _noticeDesc;
+  final ImagePicker _picker = ImagePicker();
+  File file = File('');
 
   @override
   void initState() {
@@ -46,9 +53,7 @@ class _AddNoticeState extends State<AddNotice> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 15.h,
-              ),
+              SizedBox(height: 15.h),
               SizedBox(
                 child: TextFormField(
                   controller: _noticeName,
@@ -63,9 +68,7 @@ class _AddNoticeState extends State<AddNotice> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10.h,
-              ),
+              SizedBox(height: 10.h),
               SizedBox(
                 child: TextFormField(
                   controller: _noticeDesc,
@@ -81,11 +84,74 @@ class _AddNoticeState extends State<AddNotice> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10.h,
-              ),
-              //TODO:Add Image Picker for notice
-              Text("Add Image PIcker"),
+              SizedBox(height: 15.h),
+              file.path == ''
+                  ? Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: ClipRRect(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
+                          child: GestureDetector(
+                            onTap: () {
+                              _imgFromGallery();
+                            },
+                            child: Container(
+                              height: 100.h,
+                              width: 130.w,
+                              color: const Color(0xffF0F0F0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    'assets/icons/gallery.svg',
+                                    height: 30,
+                                  ),
+                                  const SizedBox(height: 5),
+                                  const Text('Add Images')
+                                ],
+                              ),
+                            ),
+                          )),
+                    )
+                  : Container(
+                      height: 100.h,
+                      width: 130.w,
+                      padding: const EdgeInsets.all(4.0),
+                      child: ClipRRect(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(15)),
+                        child: Stack(
+                          children: [
+                            Container(
+                                height: 100.h,
+                                width: 130.w,
+                                color: const Color(0xffF0F0F0),
+                                child: Image.file(
+                                  file,
+                                  fit: BoxFit.cover,
+                                )),
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    file = File('');
+                                  });
+                                },
+                                child: SizedBox(
+                                  width: 35,
+                                  height: 35,
+                                  child: SvgPicture.asset(
+                                    'assets/icons/deleteimage.svg',
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+              SizedBox(height: 10.h),
               MaterialButton(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18.0),
@@ -132,5 +198,26 @@ class _AddNoticeState extends State<AddNotice> {
         ),
       ),
     );
+  }
+
+  _imgFromGallery() async {
+    //IF PERSON CANCELS THEN THE PATH WILL BE '' -- KEEP IN MIND
+    XFile? image = (await _picker.pickImage(
+          source: ImageSource.gallery,
+          imageQuality: 40,
+        )) ??
+        XFile('');
+
+    setState(() {
+      // _videoPlayerController.dispose();
+      // video = File('');
+      if (image.path == '') {
+        debug.log('Cancelled');
+      } else {
+        setState(() {
+          file = File(image.path);
+        });
+      }
+    });
   }
 }

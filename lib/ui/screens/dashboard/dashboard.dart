@@ -6,7 +6,6 @@ import 'package:finsem_org/ui/screens/services/services.dart';
 import 'package:finsem_org/ui/screens/tickets/tickets.dart';
 import 'package:finsem_org/ui/screens/transactions_screen/payment_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -66,19 +65,7 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ),
                 child: Column(
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AddUser(),
-                          ),
-                        );
-                      },
-                      child: const Text('Add User'),
-                    ),
-                  ],
+                  children: const [],
                 ),
               ),
               AnimatedContainer(
@@ -107,7 +94,7 @@ class _DashboardState extends State<Dashboard> {
                           children: [
                             SvgIcon(
                               color: 0xffffffff,
-                              assetPath: "assets/icon/menu-dots.svg",
+                              assetPath: "assets/icons/menu-dots.svg",
                               size: 25,
                               onPressed: expand,
                             ),
@@ -161,6 +148,7 @@ class _DashboardState extends State<Dashboard> {
                                         title: 'Add User',
                                         asset: "assets/images/addUser.png",
                                         onPressed: () {
+                                          expand();
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -174,6 +162,7 @@ class _DashboardState extends State<Dashboard> {
                                         title: 'Events',
                                         asset: "assets/images/events.png",
                                         onPressed: () {
+                                          expand();
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -186,6 +175,7 @@ class _DashboardState extends State<Dashboard> {
                                         title: 'Notice',
                                         asset: "assets/images/notice.png",
                                         onPressed: () {
+                                          expand();
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -204,6 +194,7 @@ class _DashboardState extends State<Dashboard> {
                                         title: 'Payments',
                                         asset: "assets/images/payments.png",
                                         onPressed: () {
+                                          expand();
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -217,6 +208,7 @@ class _DashboardState extends State<Dashboard> {
                                         title: 'Tickets',
                                         asset: "assets/images/tickets.png",
                                         onPressed: () {
+                                          expand();
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -231,6 +223,7 @@ class _DashboardState extends State<Dashboard> {
                                         title: 'Services',
                                         asset: "assets/images/service.png",
                                         onPressed: () {
+                                          expand();
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -248,6 +241,7 @@ class _DashboardState extends State<Dashboard> {
                                         title: 'Housekeeping',
                                         asset: "assets/images/housekeeping.png",
                                         onPressed: () {
+                                          expand();
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(

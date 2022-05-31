@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String firstName = "";
   String lastName = "";
   String bodyTemp = "";
-  var measure;
+  num measure = 1;
 
   void _submit() {
     showDialog<void>(
@@ -276,26 +276,26 @@ class _MyHomePageState extends State<MyHomePage> {
                                 BorderSide(color: Colors.grey, width: 0.0),
                           ),
                           border: OutlineInputBorder()),
-                      items: [
-                        const DropdownMenuItem(
+                      items: const [
+                        DropdownMenuItem(
                           child: Text("ºC"),
                           value: 1,
                         ),
-                        const DropdownMenuItem(
+                        DropdownMenuItem(
                           child: Text("ºF"),
                           value: 2,
                         )
                       ],
                       hint: const Text("Select item"),
-                      onChanged: (value) {
+                      onChanged: (int? value) {
                         setState(() {
-                          measure = value;
+                          measure = value!;
                           // measureList.add(measure);
                         });
                       },
-                      onSaved: (value) {
+                      onSaved: (int? value) {
                         setState(() {
-                          measure = value;
+                          measure = value!;
                         });
                       }),
                   const SizedBox(

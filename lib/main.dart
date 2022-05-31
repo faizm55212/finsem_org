@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(360, 750),
-      builder: () => GetMaterialApp(
+      builder: (_, child) => GetMaterialApp(
         title: 'FinSEM_org',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

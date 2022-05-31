@@ -7,7 +7,9 @@ class EventController {
 
   static Future<List<Event>> fetchEvents() async {
     var eventSnap = await Api.fetchEvents();
-    eventSnap.forEach((element) => _events.add(Event.fromMap(element.data()!)));
+    for (var element in eventSnap) {
+      _events.add(Event.fromMap(element.data()!));
+    }
     return _events;
   }
 }
