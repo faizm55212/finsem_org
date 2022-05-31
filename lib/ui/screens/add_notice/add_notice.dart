@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finsem_org/controller/api.dart';
 import 'package:finsem_org/ui/component/curved_appbar.dart';
 import 'package:finsem_org/utils/colours.dart';
 import 'package:flutter/material.dart';
@@ -172,25 +174,34 @@ class _AddNoticeState extends State<AddNotice> {
                     ),
                   ),
                 ),
-                onPressed: () {
-                  //_submit();
-                  //print(_genderValue);
-                  //TODO: UPDATE POST METHOD OF ADD USER
-                  // HttpsCallable callable =
-                  //     FirebaseFunctions.instanceFor(region: 'asia-south1')
-                  //         .httpsCallable('manageUser');
-                  // callable.call(<String, dynamic>{
-                  //   'req': 'add_user',
-                  //   'name': _name!.text,
-                  //   'email': _email!.text,
-                  //   'add': _add!.text,
-                  //   'passwd': _passwd!.text,
-                  //   'org': 'Calc',
-                  //   'oid': 'OU7N0lCaWVxbYssLmM19',
-                  //   'monthly': 100,
-                  //   'pending': 15
-                  // }).then((value) =>
-                  //     Fluttertoast.showToast(msg: value.data.toString()));
+                onPressed: () async {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return Container(
+                            color: Colors.white,
+                            height: 100,
+                            width: 100,
+                            child: const Center(
+                                child: CircularProgressIndicator()));
+                      });
+                  final uploadedImageURL =
+                      await Api.uploadImageToFirebase(file, 'Notices');
+                  DocumentReference dr = FirebaseFirestore.instance
+                      .collection('Organizations')
+                      .doc('tw2TPyM4WQgbLJ3w4hxAfGnc9JE2')
+                      .collection('Notices')
+                      .doc();
+                  debug.log(uploadedImageURL);
+                  await dr.set({
+                    "title": _noticeName!.text,
+                    "desc": _noticeDesc!.text,
+                    "imageLink": uploadedImageURL,
+                    "uploadDate": DateTime.now().millisecondsSinceEpoch,
+                  }).then((value) {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  });
                 },
               ),
             ],

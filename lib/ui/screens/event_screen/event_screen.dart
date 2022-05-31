@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finsem_org/controller/api.dart';
 import 'package:finsem_org/utils/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:finsem_org/ui/component/curved_appbar.dart';
@@ -20,6 +22,7 @@ class _EventsScreenState extends State<EventsScreen> {
   TextEditingController? _eventName;
   TextEditingController? _eventDesc;
   TextEditingController? _eventLocation;
+  TextEditingController? _amountReq;
   TextEditingController? _eventDate;
   TextEditingController? _eventTime;
   bool _takeDontaions = false;
@@ -33,6 +36,7 @@ class _EventsScreenState extends State<EventsScreen> {
     _eventLocation = TextEditingController();
     _eventDate = TextEditingController();
     _eventTime = TextEditingController();
+    _amountReq = TextEditingController();
 
     super.initState();
   }
@@ -44,6 +48,7 @@ class _EventsScreenState extends State<EventsScreen> {
     _eventLocation!.dispose();
     _eventDate!.dispose();
     _eventTime!.dispose();
+    _amountReq!.dispose();
 
     super.dispose();
   }
@@ -274,6 +279,22 @@ class _EventsScreenState extends State<EventsScreen> {
                   )
                 ],
               ),
+              Visibility(
+                  visible: _takeDontaions, child: SizedBox(height: 15.h)),
+              Visibility(
+                visible: _takeDontaions,
+                child: TextFormField(
+                  controller: _amountReq,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: "Amount Req",
+                    //hintText: 'Name',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                ),
+              ),
               const SizedBox(height: 40),
               Center(
                 child: MaterialButton(
@@ -296,7 +317,40 @@ class _EventsScreenState extends State<EventsScreen> {
                       ),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () async {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return Container(
+                              color: Colors.white,
+                              height: 100,
+                              width: 100,
+                              child: const Center(
+                                  child: CircularProgressIndicator()));
+                        });
+                    final uploadedImageURL =
+                        await Api.uploadImageToFirebase(file, 'Events');
+                    DocumentReference dr = FirebaseFirestore.instance
+                        .collection('Organizations')
+                        .doc('tw2TPyM4WQgbLJ3w4hxAfGnc9JE2')
+                        .collection('Events')
+                        .doc();
+                    debug.log(uploadedImageURL);
+                    await dr.set({
+                      "title": _eventName!.text,
+                      "desc": _eventDesc!.text,
+                      "date": _eventDate!.text,
+                      "imgUrl": uploadedImageURL,
+                      "Time": "${_eventTime!.text} $_eventTimeTypeValue",
+                      "location": _eventLocation!.text,
+                      "donation": _takeDontaions,
+                      "uploadDate": DateTime.now().millisecondsSinceEpoch,
+                      "amountReq": _takeDontaions ? _amountReq!.text : 0,
+                    }).then((value) {
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                    });
+                  },
                 ),
               ),
             ],
