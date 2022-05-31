@@ -11,6 +11,7 @@ class CrowdfundingPaymentScreen extends StatelessWidget {
     return Container(
       color: FinColours.secondaryColor,
       child: ListView.builder(
+          physics: BouncingScrollPhysics(),
           itemCount: DummyData().paymentDonation.length,
           itemBuilder: (BuildContext context, int index) {
             return Column(
@@ -59,14 +60,14 @@ class CrowdfundingPaymentScreen extends StatelessWidget {
                           ),
                           Text(
                             //trx date
-                            "25/05/2022 10:20 PM",
+                            DummyData().paymentDonation[index].dateTime,
                             style: TextStyle(
                                 color: FinColours.secondaryTextColor,
                                 fontSize: 14),
                           ),
                           Text(
                             //trx id
-                            "ID : " + "IB123564895",
+                            DummyData().paymentDonation[index].trxID,
                             style: TextStyle(
                                 color: FinColours.secondaryTextColor,
                                 fontSize: 14),

@@ -12,6 +12,7 @@ class HistoryPaymentScreen extends StatelessWidget {
       color: FinColours.secondaryColor,
       child: Center(
         child: ListView.builder(
+            physics: BouncingScrollPhysics(),
             itemCount: DummyData().paymentHistory.length,
             itemBuilder: (BuildContext context, int index) {
               return Column(

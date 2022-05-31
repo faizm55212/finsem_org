@@ -78,7 +78,7 @@ class _ViewTicketScreenState extends State<ViewTicketScreen> {
                 ),
                 Text(
                   "Status : " +
-                      "${DummyData().tickets[widget.ticketID].Tstatus}",
+                      "${DummyData().tickets[widget.ticketID].tstatus}",
                   style: GoogleFonts.poppins(
                     color: FinColours.grey,
                     fontSize: 16,
@@ -151,7 +151,7 @@ class _ViewTicketScreenState extends State<ViewTicketScreen> {
                     ),
                   ),
                   onPressed: () {
-                    DummyData().tickets[widget.ticketID].Tstatus ==
+                    DummyData().tickets[widget.ticketID].tstatus ==
                         _updateStatusvalue;
                     Navigator.pop(context);
                   },

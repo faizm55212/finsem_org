@@ -123,35 +123,136 @@ class DummyData {
   ].obs;
   RxList paymentDonation = [
     PaymentDonation(
-        purpose: "Donation",
-        blockRoom: "Tower 4 - 903",
-        number: "9614035474",
-        amount: "2000",
-        pName: "Dheeraj Gupta"),
+      purpose: "Donation",
+      blockRoom: "Tower 4 - 903",
+      number: "9614035474",
+      amount: "2000",
+      pName: "Dheeraj Gupta",
+      dateTime: "22/04/2022 09:28 AM",
+      trxID: "TX1236541353765029",
+    ),
     PaymentDonation(
-        purpose: "Donation",
-        blockRoom: "Tower 2 - 1502",
-        number: "8691540312",
-        amount: "8000",
-        pName: "Tanweer Hussain"),
+      purpose: "Donation",
+      blockRoom: "Tower 2 - 1502",
+      number: "8691540312",
+      amount: "8000",
+      pName: "Tanweer Hussain",
+      dateTime: "21/04/2022 10:42 AM",
+      trxID: "TX1235641358795642",
+    ),
     PaymentDonation(
-        purpose: "Donation",
-        blockRoom: "Tower 1 - 101",
-        number: "723489065",
-        amount: "4000",
-        pName: "Manish Gogoi"),
+      purpose: "Donation",
+      blockRoom: "Tower 1 - 101",
+      number: "723489065",
+      amount: "4000",
+      pName: "Manish Gogoi",
+      dateTime: "22/04/2022 12:31 PM",
+      trxID: "TX12457641356781122",
+    ),
     PaymentDonation(
-        purpose: "Donation",
-        blockRoom: "Tower 1 - 1702",
-        number: "9895035480",
-        amount: "6000",
-        pName: "Diganta Das"),
+      purpose: "Donation",
+      blockRoom: "Tower 1 - 1702",
+      number: "9895035480",
+      amount: "6000",
+      pName: "Diganta Das",
+      dateTime: "23/04/2022 09:22 AM",
+      trxID: "TX1242362034152265",
+    ),
     PaymentDonation(
-        purpose: "Donation",
-        blockRoom: "Tower 5 - 303",
-        number: "9987045075",
-        amount: "4000",
-        pName: "Dheeraj Gupta"),
+      purpose: "Donation",
+      blockRoom: "Tower 5 - 303",
+      number: "9987045075",
+      amount: "4000",
+      pName: "Billu Sanda",
+      dateTime: "23/04/2022 07:54 AM",
+      trxID: "TX124231342668496",
+    ),
+  ].obs;
+  RxList housekeeping = [
+    Housekeeping(
+      name: 'Suraj Singh',
+      age: "26",
+      type: "Cook",
+      desc: 'Skilled cook with 2+ years\' experience. Cooks vegetarian only.',
+      mobile: '+919914173314',
+      gender: 'M',
+    ),
+    Housekeeping(
+      name: 'Rani Devi',
+      age: "30",
+      type: "Maid",
+      desc: 'Clean your house and kitchen',
+      mobile: '+919914170014',
+      gender: 'F',
+    ),
+    Housekeeping(
+      name: 'Rishi yadav',
+      age: "30",
+      type: "Cook",
+      desc:
+          'Gourmet cook with 6+ years experience. Cooks both veg and non-veg.',
+      mobile: '+919914170014',
+      gender: 'M',
+    ),
+    Housekeeping(
+      name: 'Anita',
+      age: "30",
+      type: "Cook",
+      desc:
+          'Skilled cook having more than 3 years of experience and cooks north indian varieties, south indian varieties, marwari dishes and Chinese dishes too. Cooks both veg and non-veg',
+      mobile: '+919914170014',
+      gender: 'F',
+    ),
+    Housekeeping(
+      name: 'Parvez H',
+      age: "30",
+      type: "Cook",
+      desc:
+          'He is skilled, punctual and obedient cook. He cooks on basis on ur requirement or desire. Cooks Kashmiri, Punjabi and mughlai dishes and having 2+ years experience. Cooks both veg and non-veg.',
+      mobile: '+919914170014',
+      gender: 'M',
+    ),
+    Housekeeping(
+      name: 'Lakhan',
+      age: "30",
+      type: "Cook",
+      desc:
+          'Skilled cooks with 1 year experience and makes delicious and tasty north Indian as well as south indian food. Cooks both veg and non-veg.',
+      mobile: '+919914170014',
+      gender: 'M',
+    ),
+  ].obs;
+  RxList services = [
+    Services(
+      name: "Rashid",
+      mobile: "+919924180023",
+      profession: "Electrician",
+    ),
+    Services(
+      name: "Konda Reddy",
+      mobile: "+919914173314",
+      profession: "Carpenter",
+    ),
+    Services(
+      name: "Kaushal Vashisth",
+      mobile: "+918823182243",
+      profession: "Plumber",
+    ),
+    Services(
+      name: "Shubham",
+      mobile: "+918924320099",
+      profession: "Electrician",
+    ),
+    Services(
+      name: "Vishnu Nandan",
+      mobile: "+918924320099",
+      profession: "ISP Technician - ACT",
+    ),
+    Services(
+      name: "Pawan Kumar",
+      mobile: "+918924320099",
+      profession: "ISP Technician - Jio",
+    ),
   ].obs;
 }
 
@@ -161,14 +262,17 @@ class PaymentDonation {
   final String purpose;
   final String number;
   final String amount;
+  final String dateTime;
+  final String trxID;
 
-  PaymentDonation({
-    required this.purpose,
-    required this.blockRoom,
-    required this.number,
-    required this.amount,
-    required this.pName,
-  });
+  PaymentDonation(
+      {required this.purpose,
+      required this.blockRoom,
+      required this.number,
+      required this.amount,
+      required this.pName,
+      required this.dateTime,
+      required this.trxID});
 }
 
 class PaymentPending {
@@ -220,4 +324,34 @@ class Tickets {
       required this.tImg,
       required this.tstatus,
       required this.tType});
+}
+
+class Housekeeping {
+  final String name;
+  final String age;
+  final String type;
+  final String gender;
+  final String mobile;
+  final String desc;
+
+  Housekeeping({
+    required this.type,
+    required this.desc,
+    required this.name,
+    required this.mobile,
+    required this.gender,
+    required this.age,
+  });
+}
+
+class Services {
+  final String name;
+  final String mobile;
+  final String profession;
+
+  Services({
+    required this.name,
+    required this.mobile,
+    required this.profession,
+  });
 }
