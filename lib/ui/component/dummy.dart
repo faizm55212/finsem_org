@@ -7,21 +7,21 @@ class DummyData {
         tDesc: "Blockage in Tap",
         tID: "TK45689",
         tImg: "assets/images/blockTap.jpg",
-        Tstatus: "Recieved",
+        tstatus: "Recieved",
         tType: "Plumber"),
     Tickets(
         tBlockRoom: "Tower 4 - 801",
         tDesc: "Broken Table",
         tID: "TK44569",
         tImg: "assets/images/brokenTable.jpg",
-        Tstatus: "Under Progress",
+        tstatus: "Under Progress",
         tType: "Carpenter"),
     Tickets(
         tBlockRoom: "Tower 3 - 1503",
         tDesc: "Tubelight is Flickering",
         tID: "TK78554",
         tImg: "assets/images/flickertube.jpeg",
-        Tstatus: "Resolved",
+        tstatus: "Resolved",
         tType: "Electrician"),
   ].obs;
   RxList paymentHistory = [
@@ -313,7 +313,7 @@ class Tickets {
   final String tType;
   final String tDesc;
   final String tImg;
-  final String Tstatus;
+  final String tstatus;
   final String tID;
 
   Tickets(
@@ -321,7 +321,7 @@ class Tickets {
       required this.tDesc,
       required this.tID,
       required this.tImg,
-      required this.Tstatus,
+      required this.tstatus,
       required this.tType});
 }
 

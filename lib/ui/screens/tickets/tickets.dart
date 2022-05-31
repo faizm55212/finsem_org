@@ -82,7 +82,7 @@ class TicketsScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   "Status : " +
-                                      "${DummyData().tickets[index].Tstatus}",
+                                      "${DummyData().tickets[index].tstatus}",
                                   style: GoogleFonts.poppins(
                                     color: FinColours.grey,
                                     fontSize: 12,
