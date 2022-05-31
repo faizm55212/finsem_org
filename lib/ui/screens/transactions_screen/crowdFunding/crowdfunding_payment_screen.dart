@@ -11,7 +11,7 @@ class CrowdfundingPaymentScreen extends StatelessWidget {
     return Container(
       color: FinColours.secondaryColor,
       child: ListView.builder(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           itemCount: DummyData().paymentDonation.length,
           itemBuilder: (BuildContext context, int index) {
             return Column(
@@ -39,7 +39,7 @@ class CrowdfundingPaymentScreen extends StatelessWidget {
                           Text(
                             //Name of sender
                             DummyData().paymentDonation[index].pName,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold),

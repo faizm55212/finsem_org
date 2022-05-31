@@ -70,36 +70,30 @@ class _EventsScreenState extends State<EventsScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 15.h,
-              ),
-              SizedBox(
-                child: TextFormField(
-                  controller: _eventName,
-                  keyboardType: TextInputType.text,
-                  textCapitalization: TextCapitalization.words,
-                  decoration: InputDecoration(
-                    labelText: "Name",
-                    //hintText: 'Name',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+              SizedBox(height: 15.h),
+              TextFormField(
+                controller: _eventName,
+                keyboardType: TextInputType.text,
+                textCapitalization: TextCapitalization.words,
+                decoration: InputDecoration(
+                  labelText: "Name",
+                  //hintText: 'Name',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
                 ),
               ),
               SizedBox(height: 10.h),
-              SizedBox(
-                child: TextFormField(
-                  controller: _eventDesc,
-                  keyboardType: TextInputType.text,
-                  maxLines: 5,
-                  textCapitalization: TextCapitalization.words,
-                  decoration: InputDecoration(
-                    labelText: "Description",
-                    //hintText: 'Name',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+              TextFormField(
+                controller: _eventDesc,
+                keyboardType: TextInputType.text,
+                maxLines: 5,
+                textCapitalization: TextCapitalization.words,
+                decoration: InputDecoration(
+                  labelText: "Description",
+                  //hintText: 'Name',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
                 ),
               ),
@@ -173,17 +167,15 @@ class _EventsScreenState extends State<EventsScreen> {
                 ],
               ),
               SizedBox(height: 10.h),
-              SizedBox(
-                child: TextFormField(
-                  controller: _eventLocation,
-                  keyboardType: TextInputType.text,
-                  textCapitalization: TextCapitalization.words,
-                  decoration: InputDecoration(
-                    labelText: "Location",
-                    //hintText: 'Name',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+              TextFormField(
+                controller: _eventLocation,
+                keyboardType: TextInputType.text,
+                textCapitalization: TextCapitalization.words,
+                decoration: InputDecoration(
+                  labelText: "Location",
+                  //hintText: 'Name',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
                 ),
               ),

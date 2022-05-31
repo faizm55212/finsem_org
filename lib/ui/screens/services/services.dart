@@ -1,6 +1,6 @@
 import 'package:finsem_org/ui/component/curved_appbar.dart';
 import 'package:finsem_org/ui/component/dummy.dart';
-import 'package:finsem_org/ui/screens/services/addServiceMen.dart';
+import 'package:finsem_org/ui/screens/services/add_service_men.dart';
 import 'package:finsem_org/utils/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,10 +17,10 @@ class ServicesScreen extends StatelessWidget {
           backgroundColor: Colors.white,
           body: Column(
             children: [
-              Container(
+              SizedBox(
                 height: 620.h,
                 child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemCount: DummyData().services.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Column(
@@ -32,7 +32,7 @@ class ServicesScreen extends StatelessWidget {
                             padding: const EdgeInsets.fromLTRB(18, 10, 18, 10),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: Color(0xffbbeade),
+                              color: const Color(0xffbbeade),
                             ),
                             height: 80,
                             width: 300.w,
@@ -55,12 +55,12 @@ class ServicesScreen extends StatelessWidget {
                                           //Name of sender
                                           //"Name",
                                           DummyData().services[index].name,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 5,
                                         ),
                                         Text(
@@ -90,7 +90,7 @@ class ServicesScreen extends StatelessWidget {
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(18.0),
-                                                color: Color(0xffa22356)),
+                                                color: const Color(0xffa22356)),
                                             child: Center(
                                               child: Row(
                                                 mainAxisAlignment:
@@ -132,7 +132,7 @@ class ServicesScreen extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
-                                  children: [],
+                                  children: const [],
                                 )
                               ],
                             ),
@@ -151,12 +151,12 @@ class ServicesScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AddServiceMen(),
+                    builder: (context) => const AddServiceMen(),
                   ),
                 );
               },
               label: Row(
-                children: [
+                children: const [
                   Icon(
                     Icons.add,
                     color: Colors.black,

@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ViewTicketScreen extends StatefulWidget {
   final int ticketID;
-  ViewTicketScreen({Key? key, required this.ticketID});
+  const ViewTicketScreen({Key? key, required this.ticketID}) : super(key: key);
 
   @override
   State<ViewTicketScreen> createState() => _ViewTicketScreenState();
@@ -53,15 +53,16 @@ class _ViewTicketScreenState extends State<ViewTicketScreen> {
                 ),
                 Text(
                   DummyData().tickets[widget.ticketID].tDesc,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   DummyData().tickets[widget.ticketID].tBlockRoom,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.normal),
                 ),
                 Text(
-                  "Req Type : " +
-                      "${DummyData().tickets[widget.ticketID].tType}",
+                  "Req Type : ${DummyData().tickets[widget.ticketID].tType}",
                   style: GoogleFonts.poppins(
                     color: FinColours.grey,
                     fontSize: 16,
@@ -69,7 +70,7 @@ class _ViewTicketScreenState extends State<ViewTicketScreen> {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  "ID: " + "${DummyData().tickets[widget.ticketID].tID}",
+                  "ID: ${DummyData().tickets[widget.ticketID].tID}",
                   style: GoogleFonts.poppins(
                     color: FinColours.grey,
                     fontSize: 16,
@@ -77,8 +78,7 @@ class _ViewTicketScreenState extends State<ViewTicketScreen> {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  "Status : " +
-                      "${DummyData().tickets[widget.ticketID].tstatus}",
+                  "Status : ${DummyData().tickets[widget.ticketID].tstatus}",
                   style: GoogleFonts.poppins(
                     color: FinColours.grey,
                     fontSize: 16,
@@ -120,7 +120,7 @@ class _ViewTicketScreenState extends State<ViewTicketScreen> {
                               }, //dropdown background color
                               underline: Container(),
                               isExpanded: true,
-                              icon: Padding(
+                              icon: const Padding(
                                   padding: EdgeInsets.only(left: 0),
                                   child:
                                       Icon(Icons.keyboard_arrow_down_rounded)),

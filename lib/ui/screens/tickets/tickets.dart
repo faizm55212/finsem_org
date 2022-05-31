@@ -64,8 +64,7 @@ class TicketsScreen extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
-                                  "Req Type : " +
-                                      "${DummyData().tickets[index].tType}",
+                                  "Req Type : ${DummyData().tickets[index].tType}",
                                   style: GoogleFonts.poppins(
                                     color: FinColours.grey,
                                     fontSize: 12,
@@ -73,7 +72,7 @@ class TicketsScreen extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
-                                  "ID: " + "${DummyData().tickets[index].tID}",
+                                  "ID: ${DummyData().tickets[index].tID}",
                                   style: GoogleFonts.poppins(
                                     color: FinColours.grey,
                                     fontSize: 12,
@@ -81,8 +80,7 @@ class TicketsScreen extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
-                                  "Status : " +
-                                      "${DummyData().tickets[index].tstatus}",
+                                  "Status : ${DummyData().tickets[index].tstatus}",
                                   style: GoogleFonts.poppins(
                                     color: FinColours.grey,
                                     fontSize: 12,

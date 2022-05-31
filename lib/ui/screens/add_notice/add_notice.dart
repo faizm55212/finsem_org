@@ -39,11 +39,6 @@ class _AddNoticeState extends State<AddNotice> {
     super.dispose();
   }
 
-  String _eventTimeTypeValue = "AM";
-  var timeType = [
-    'AM',
-    'PM',
-  ];
   @override
   Widget build(BuildContext context) {
     return CurvedAppBar(
@@ -56,33 +51,29 @@ class _AddNoticeState extends State<AddNotice> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(height: 15.h),
-              SizedBox(
-                child: TextFormField(
-                  controller: _noticeName,
-                  keyboardType: TextInputType.text,
-                  textCapitalization: TextCapitalization.words,
-                  decoration: InputDecoration(
-                    labelText: "Name",
-                    //hintText: 'Name',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+              TextFormField(
+                controller: _noticeName,
+                keyboardType: TextInputType.text,
+                textCapitalization: TextCapitalization.words,
+                decoration: InputDecoration(
+                  labelText: "Name",
+                  //hintText: 'Name',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
                 ),
               ),
               SizedBox(height: 10.h),
-              SizedBox(
-                child: TextFormField(
-                  controller: _noticeDesc,
-                  keyboardType: TextInputType.text,
-                  maxLines: 5,
-                  textCapitalization: TextCapitalization.words,
-                  decoration: InputDecoration(
-                    labelText: "Description",
-                    //hintText: 'Name',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+              TextFormField(
+                controller: _noticeDesc,
+                keyboardType: TextInputType.text,
+                maxLines: 5,
+                textCapitalization: TextCapitalization.words,
+                decoration: InputDecoration(
+                  labelText: "Description",
+                  //hintText: 'Name',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
                 ),
               ),

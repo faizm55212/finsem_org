@@ -1,6 +1,6 @@
 import 'package:finsem_org/ui/component/curved_appbar.dart';
 import 'package:finsem_org/ui/component/dummy.dart';
-import 'package:finsem_org/ui/screens/housekeeping/addHousekeeping.dart';
+import 'package:finsem_org/ui/screens/housekeeping/add_house_keeping.dart';
 import 'package:finsem_org/utils/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,10 +17,10 @@ class HousekeepingScreen extends StatelessWidget {
           backgroundColor: Colors.white,
           body: Column(
             children: [
-              Container(
+              SizedBox(
                 height: 620.h,
                 child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemCount: DummyData().housekeeping.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Column(
@@ -32,7 +32,7 @@ class HousekeepingScreen extends StatelessWidget {
                             padding: const EdgeInsets.fromLTRB(18, 10, 10, 10),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: Color(0xffbbeade),
+                              color: const Color(0xffbbeade),
                             ),
                             height: 135,
                             width: 300.w,
@@ -60,15 +60,15 @@ class HousekeepingScreen extends StatelessWidget {
                                                   .housekeeping[index]
                                                   .type +
                                               ")",
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 5,
                                         ),
-                                        Container(
+                                        SizedBox(
                                           height: 85,
                                           width: 170.w,
                                           child: Text(
@@ -87,60 +87,58 @@ class HousekeepingScreen extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    Container(
-                                      child: MaterialButton(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(18.0),
-                                        ),
-                                        child: Container(
-                                          height: 35,
-                                          width: 70,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(18.0),
-                                              color: Color(0xffa22356)),
-                                          child: Center(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: const [
-                                                Icon(
-                                                  Icons.call,
+                                    MaterialButton(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(18.0),
+                                      ),
+                                      child: Container(
+                                        height: 35,
+                                        width: 70,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(18.0),
+                                            color: const Color(0xffa22356)),
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: const [
+                                              Icon(
+                                                Icons.call,
+                                                color: Colors.white,
+                                                size: 16.0,
+                                              ),
+                                              SizedBox(
+                                                width: 3,
+                                              ),
+                                              Text(
+                                                'Call',
+                                                style: TextStyle(
+                                                  fontSize: 16.0,
                                                   color: Colors.white,
-                                                  size: 16.0,
                                                 ),
-                                                SizedBox(
-                                                  width: 3,
-                                                ),
-                                                Text(
-                                                  'Call',
-                                                  style: TextStyle(
-                                                    fontSize: 16.0,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                        onPressed: () async {
-                                          final Uri launchUri = Uri(
-                                            scheme: 'tel',
-                                            path: DummyData()
-                                                .housekeeping[index]
-                                                .mobile,
-                                          );
-                                          await launchUrl(launchUri);
-                                        },
                                       ),
+                                      onPressed: () async {
+                                        final Uri launchUri = Uri(
+                                          scheme: 'tel',
+                                          path: DummyData()
+                                              .housekeeping[index]
+                                              .mobile,
+                                        );
+                                        await launchUrl(launchUri);
+                                      },
                                     ),
                                   ],
                                 ),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
-                                  children: [],
+                                  children: const [],
                                 )
                               ],
                             ),
@@ -159,12 +157,12 @@ class HousekeepingScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AddHousekeeping(),
+                    builder: (context) => const AddHousekeeping(),
                   ),
                 );
               },
               label: Row(
-                children: [
+                children: const [
                   Icon(
                     Icons.add,
                     color: Colors.black,
