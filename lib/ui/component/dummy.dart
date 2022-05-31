@@ -167,6 +167,92 @@ class DummyData {
       trxID: "TX124231342668496",
     ),
   ].obs;
+  RxList housekeeping = [
+    Housekeeping(
+      name: 'Suraj Singh',
+      age: "26",
+      type: "Cook",
+      desc: 'Skilled cook with 2+ years\' experience. Cooks vegetarian only.',
+      mobile: '+919914173314',
+      gender: 'M',
+    ),
+    Housekeeping(
+      name: 'Rani Devi',
+      age: "30",
+      type: "Maid",
+      desc: 'Clean your house and kitchen',
+      mobile: '+919914170014',
+      gender: 'F',
+    ),
+    Housekeeping(
+      name: 'Rishi yadav',
+      age: "30",
+      type: "Cook",
+      desc:
+          'Gourmet cook with 6+ years experience. Cooks both veg and non-veg.',
+      mobile: '+919914170014',
+      gender: 'M',
+    ),
+    Housekeeping(
+      name: 'Anita',
+      age: "30",
+      type: "Cook",
+      desc:
+          'Skilled cook having more than 3 years of experience and cooks north indian varieties, south indian varieties, marwari dishes and Chinese dishes too. Cooks both veg and non-veg',
+      mobile: '+919914170014',
+      gender: 'F',
+    ),
+    Housekeeping(
+      name: 'Parvez H',
+      age: "30",
+      type: "Cook",
+      desc:
+          'He is skilled, punctual and obedient cook. He cooks on basis on ur requirement or desire. Cooks Kashmiri, Punjabi and mughlai dishes and having 2+ years experience. Cooks both veg and non-veg.',
+      mobile: '+919914170014',
+      gender: 'M',
+    ),
+    Housekeeping(
+      name: 'Lakhan',
+      age: "30",
+      type: "Cook",
+      desc:
+          'Skilled cooks with 1 year experience and makes delicious and tasty north Indian as well as south indian food. Cooks both veg and non-veg.',
+      mobile: '+919914170014',
+      gender: 'M',
+    ),
+  ].obs;
+  RxList services = [
+    Services(
+      name: "Rashid",
+      mobile: "+919924180023",
+      profession: "Electrician",
+    ),
+    Services(
+      name: "Konda Reddy",
+      mobile: "+919914173314",
+      profession: "Carpenter",
+    ),
+    Services(
+      name: "Kaushal Vashisth",
+      mobile: "+918823182243",
+      profession: "Plumber",
+    ),
+    Services(
+      name: "Shubham",
+      mobile: "+918924320099",
+      profession: "Electrician",
+    ),
+    Services(
+      name: "Vishnu Nandan",
+      mobile: "+918924320099",
+      profession: "ISP Technician - ACT",
+    ),
+    Services(
+      name: "Pawan Kumar",
+      mobile: "+918924320099",
+      profession: "ISP Technician - Jio",
+    ),
+  ].obs;
 }
 
 class PaymentDonation {
@@ -237,4 +323,34 @@ class Tickets {
       required this.tImg,
       required this.Tstatus,
       required this.tType});
+}
+
+class Housekeeping {
+  final String name;
+  final String age;
+  final String type;
+  final String gender;
+  final String mobile;
+  final String desc;
+
+  Housekeeping({
+    required this.type,
+    required this.desc,
+    required this.name,
+    required this.mobile,
+    required this.gender,
+    required this.age,
+  });
+}
+
+class Services {
+  final String name;
+  final String mobile;
+  final String profession;
+
+  Services({
+    required this.name,
+    required this.mobile,
+    required this.profession,
+  });
 }

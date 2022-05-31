@@ -1,5 +1,6 @@
 import 'package:finsem_org/ui/component/curved_appbar.dart';
 import 'package:finsem_org/ui/component/dummy.dart';
+import 'package:finsem_org/ui/screens/services/addServiceMen.dart';
 import 'package:finsem_org/utils/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,7 +21,7 @@ class ServicesScreen extends StatelessWidget {
                 height: 620.h,
                 child: ListView.builder(
                     physics: BouncingScrollPhysics(),
-                    itemCount: DummyData().paymentPending.length,
+                    itemCount: DummyData().services.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Column(
                         children: [
@@ -41,21 +42,22 @@ class ServicesScreen extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     //TODO:FIREBASE CONNECTION PENDING PAYMENT
                                     Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           //Name of sender
-                                          "Name",
+                                          //"Name",
+                                          DummyData().services[index].name,
                                           style: TextStyle(
                                               color: Colors.black,
-                                              fontSize: 20,
+                                              fontSize: 18,
                                               fontWeight: FontWeight.bold),
                                         ),
                                         SizedBox(
@@ -63,11 +65,13 @@ class ServicesScreen extends StatelessWidget {
                                         ),
                                         Text(
                                           //Type of Service
-                                          "Jio Fiber",
+                                          DummyData()
+                                              .services[index]
+                                              .profession,
                                           style: TextStyle(
                                               color:
                                                   FinColours.secondaryTextColor,
-                                              fontSize: 17),
+                                              fontSize: 16),
                                         ),
                                       ],
                                     ),
@@ -115,8 +119,8 @@ class ServicesScreen extends StatelessWidget {
                                             final Uri launchUri = Uri(
                                               scheme: 'tel',
                                               path: DummyData()
-                                                  .paymentPending[index]
-                                                  .number,
+                                                  .services[index]
+                                                  .mobile,
                                             );
                                             await launchUrl(launchUri);
                                           },
@@ -140,32 +144,17 @@ class ServicesScreen extends StatelessWidget {
                       );
                     }),
               ),
-              // MaterialButton(
-              //   shape: RoundedRectangleBorder(
-              //     borderRadius: BorderRadius.circular(18.0),
-              //   ),
-              //   child: Container(
-              //     height: 35,
-              //     width: 140,
-              //     decoration: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(18.0),
-              //         color: FinColours.mainColor),
-              //     child: const Center(
-              //       child: Text(
-              //         'Add New',
-              //         style: TextStyle(
-              //           fontSize: 16.0,
-              //           color: Colors.white,
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              //   onPressed: () {},
-              // ),
             ],
           ),
           floatingActionButton: FloatingActionButton.extended(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddServiceMen(),
+                  ),
+                );
+              },
               label: Row(
                 children: [
                   Icon(
