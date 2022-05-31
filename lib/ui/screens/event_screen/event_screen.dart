@@ -82,9 +82,7 @@ class _EventsScreenState extends State<EventsScreen> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10.h,
-              ),
+              SizedBox(height: 10.h),
               SizedBox(
                 child: TextFormField(
                   controller: _eventDesc,
@@ -184,6 +182,7 @@ class _EventsScreenState extends State<EventsScreen> {
                   ),
                 ),
               ),
+              SizedBox(height: 15.h),
               Row(
                 children: [
                   file.path == ''
