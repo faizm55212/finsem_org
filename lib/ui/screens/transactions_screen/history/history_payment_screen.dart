@@ -12,7 +12,7 @@ class HistoryPaymentScreen extends StatelessWidget {
       color: FinColours.secondaryColor,
       child: Center(
         child: ListView.builder(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             itemCount: DummyData().paymentHistory.length,
             itemBuilder: (BuildContext context, int index) {
               return Column(
@@ -40,7 +40,7 @@ class HistoryPaymentScreen extends StatelessWidget {
                             Text(
                               //Name of sender
                               DummyData().paymentHistory[index].senderName,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),

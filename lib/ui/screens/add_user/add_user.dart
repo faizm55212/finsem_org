@@ -139,7 +139,7 @@ class _AddUserState extends State<AddUser> {
                         borderRadius: BorderRadius.all(Radius.circular(40))),
                   ),
                   child: const Text('Submit'),
-                  onPressed: () {
+                  onPressed: () async {
                     HttpsCallable callable =
                         FirebaseFunctions.instanceFor(region: 'asia-south1')
                             .httpsCallable('manageUser');
@@ -164,6 +164,11 @@ class _AddUserState extends State<AddUser> {
                       Fluttertoast.showToast(msg: value.data.toString());
                       Navigator.pop(context);
                       Navigator.pop(context);
+                    }).catchError((onError) {
+                      Fluttertoast.showToast(
+                        msg: onError,
+                        backgroundColor: Colors.red,
+                      );
                     });
                   },
                 ),

@@ -50,28 +50,28 @@ class _AddHousekeepingState extends State<AddHousekeeping> {
                 Align(
                     alignment: Alignment.topLeft,
                     child: Text("Name: " + _name!.text,
-                        style: TextStyle(fontWeight: FontWeight.w700))),
+                        style: const TextStyle(fontWeight: FontWeight.w700))),
                 const SizedBox(
                   height: 10,
                 ),
                 Align(
                     alignment: Alignment.topLeft,
                     child: Text("Age: " + _age!.text + " " + _genderValue,
-                        style: TextStyle(fontWeight: FontWeight.w700))),
+                        style: const TextStyle(fontWeight: FontWeight.w700))),
                 const SizedBox(
                   height: 10,
                 ),
                 Align(
                     alignment: Alignment.topLeft,
                     child: Text("Mobile No: " + _mobileNo!.text,
-                        style: TextStyle(fontWeight: FontWeight.w700))),
+                        style: const TextStyle(fontWeight: FontWeight.w700))),
                 const SizedBox(
                   height: 10,
                 ),
                 Align(
                     alignment: Alignment.topLeft,
                     child: Text("Service Type: " + _email!.text,
-                        style: TextStyle(fontWeight: FontWeight.w700))),
+                        style: const TextStyle(fontWeight: FontWeight.w700))),
                 const SizedBox(
                   height: 10,
                 ),
@@ -81,7 +81,7 @@ class _AddHousekeepingState extends State<AddHousekeeping> {
                 Align(
                     alignment: Alignment.topLeft,
                     child: Text(_occupation!.text,
-                        style: TextStyle(fontWeight: FontWeight.w700))),
+                        style: const TextStyle(fontWeight: FontWeight.w700))),
                 const SizedBox(
                   height: 10,
                 ),
@@ -107,7 +107,7 @@ class _AddHousekeepingState extends State<AddHousekeeping> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Dashboard(),
+                        builder: (context) => const Dashboard(),
                       ),
                     ); // Empty the form fields
                     setState(() {});
@@ -122,14 +122,11 @@ class _AddHousekeepingState extends State<AddHousekeeping> {
   }
 
   String _genderValue = "Male";
-  String _idTypeValue = "Aadhar";
   var gender = [
     'Male',
     'Female',
   ];
-  var idType = [
-    'Aadhar',
-  ];
+
   @override
   Widget build(BuildContext context) {
     return CurvedAppBar(
@@ -161,62 +158,60 @@ class _AddHousekeepingState extends State<AddHousekeeping> {
               SizedBox(
                 height: 10.h,
               ),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      width: 165.w,
-                      child: TextFormField(
-                        controller: _age,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          labelText: "Age",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 165.w,
+                    child: TextFormField(
+                      controller: _age,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: "Age",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: 165.w,
-                      height: 55.h,
-                      child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                                color: Colors.black38,
-                                width: 1), //border of dropdown button
-                            borderRadius: BorderRadius.circular(
-                                20), //border raiuds of dropdown button
-                          ),
-                          child: Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
-                              child: DropdownButton(
-                                value: _genderValue,
+                  ),
+                  SizedBox(
+                    width: 165.w,
+                    height: 55.h,
+                    child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                              color: Colors.black38,
+                              width: 1), //border of dropdown button
+                          borderRadius: BorderRadius.circular(
+                              20), //border raiuds of dropdown button
+                        ),
+                        child: Padding(
+                            padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
+                            child: DropdownButton(
+                              value: _genderValue,
 
-                                items: gender.map((String items) {
-                                  return DropdownMenuItem(
-                                    value: items,
-                                    child: Text(items),
-                                  );
-                                }).toList(),
+                              items: gender.map((String items) {
+                                return DropdownMenuItem(
+                                  value: items,
+                                  child: Text(items),
+                                );
+                              }).toList(),
 
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    _genderValue = newValue!;
-                                  });
-                                }, //dropdown background color
-                                underline: Container(),
-                                isExpanded: true,
-                                icon: const Padding(
-                                    padding: EdgeInsets.only(left: 30),
-                                    child: Icon(
-                                        Icons.keyboard_arrow_down_rounded)),
-                              ))),
-                    )
-                  ],
-                ),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  _genderValue = newValue!;
+                                });
+                              }, //dropdown background color
+                              underline: Container(),
+                              isExpanded: true,
+                              icon: const Padding(
+                                  padding: EdgeInsets.only(left: 30),
+                                  child:
+                                      Icon(Icons.keyboard_arrow_down_rounded)),
+                            ))),
+                  )
+                ],
               ),
               SizedBox(
                 height: 10.h,

@@ -1,3 +1,4 @@
+import 'package:finsem_org/controller/user_controller.dart';
 import 'package:finsem_org/ui/screens/add_notice/add_notice.dart';
 import 'package:finsem_org/ui/screens/add_user/add_user.dart';
 import 'package:finsem_org/ui/screens/event_screen/event_screen.dart';
@@ -85,49 +86,46 @@ class _DashboardState extends State<Dashboard> {
                 curve: Curves.linearToEaseOut,
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SvgIcon(
-                              color: 0xffffffff,
-                              assetPath: "assets/icons/menu-dots.svg",
-                              size: 25,
-                              onPressed: expand,
-                            ),
-                            SizedBox(width: 20.w),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                SizedBox(
-                                  height: 4,
-                                ),
-                                Text(
-                                  //TODO: add org name from firebase
-                                  "Prince Town",
-                                  style: TextStyle(
-                                      fontSize: 18, color: Colors.white),
-                                ),
-                                // Text(
-                                //   "Tower1  1304",
-                                //   style: TextStyle(
-                                //       fontSize: 13, color: Colors.white),
-                                // )
-                              ],
-                            ),
-                          ],
-                        ),
-                        const CircleAvatar(
-                          radius: 20, // Image radius
-                          backgroundImage:
-                              AssetImage("assets/images/profile_pic.jpg"),
-                        ),
-                      ],
-                    ),
+                    FutureBuilder<Map<String, dynamic>>(
+                        builder: (context, snap) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SvgIcon(
+                                color: 0xffffffff,
+                                assetPath: "assets/icons/menu-dots.svg",
+                                size: 25,
+                                onPressed: expand,
+                              ),
+                              SizedBox(width: 20.w),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    UserController.loggedInUser.value.name,
+                                    style: const TextStyle(
+                                        fontSize: 18, color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          const CircleAvatar(
+                            radius: 20, // Image radius
+                            backgroundImage:
+                                AssetImage("assets/images/profile_pic.jpg"),
+                          ),
+                        ],
+                      );
+                    }),
                     Visibility(
                       visible: _visible,
                       child: _height == 750.h

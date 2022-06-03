@@ -1,7 +1,9 @@
+import 'package:finsem_org/controller/user_controller.dart';
 import 'package:finsem_org/ui/screens/dashboard/dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 
 class SigninCheck extends StatelessWidget {
   const SigninCheck({Key? key}) : super(key: key);
@@ -9,6 +11,7 @@ class SigninCheck extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FirebaseAuth auth = FirebaseAuth.instance;
+    UserController _usrController = Get.find<UserController>();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -32,6 +35,7 @@ class SigninCheck extends StatelessWidget {
                       );
                     } else {
                       if (value.data!.claims!['manager'] == true) {
+                        _usrController.init();
                         return const Dashboard();
                       } else {
                         Fluttertoast.showToast(

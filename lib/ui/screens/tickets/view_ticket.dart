@@ -1,13 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finsem_org/ui/component/curved_appbar.dart';
-import 'package:finsem_org/ui/component/dummy.dart';
 import 'package:finsem_org/utils/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ViewTicketScreen extends StatefulWidget {
-  final int ticketID;
-  ViewTicketScreen({Key? key, required this.ticketID});
+  final QueryDocumentSnapshot<Map<String, dynamic>> ticket;
+  const ViewTicketScreen({Key? key, required this.ticket}) : super(key: key);
 
   @override
   State<ViewTicketScreen> createState() => _ViewTicketScreenState();
@@ -17,9 +17,15 @@ class _ViewTicketScreenState extends State<ViewTicketScreen> {
   String _updateStatusvalue = "Recieved";
   var updateStatus = [
     'Recieved',
-    'Under Progress',
+    'Under Proccess',
     'Resolved',
   ];
+
+  @override
+  void initState() {
+    _updateStatusvalue = widget.ticket.data()['tstatus'];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +46,7 @@ class _ViewTicketScreenState extends State<ViewTicketScreen> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
-                            image: AssetImage(
-                                //TODO: Update the image url path with backend
-                                DummyData().tickets[widget.ticketID].tImg),
+                            image: NetworkImage(widget.ticket.data()['tImg']),
                             fit: BoxFit.fill,
                           )),
                     ),
@@ -52,16 +56,17 @@ class _ViewTicketScreenState extends State<ViewTicketScreen> {
                   height: 10.h,
                 ),
                 Text(
-                  DummyData().tickets[widget.ticketID].tDesc,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  widget.ticket.data()['tDesc'],
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  DummyData().tickets[widget.ticketID].tBlockRoom,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+                  widget.ticket.data()['tBlockRoom'],
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.normal),
                 ),
                 Text(
-                  "Req Type : " +
-                      "${DummyData().tickets[widget.ticketID].tType}",
+                  "Req Type : ${widget.ticket.data()['tType']}",
                   style: GoogleFonts.poppins(
                     color: FinColours.grey,
                     fontSize: 16,
@@ -69,7 +74,7 @@ class _ViewTicketScreenState extends State<ViewTicketScreen> {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  "ID: " + "${DummyData().tickets[widget.ticketID].tID}",
+                  "ID: ${widget.ticket.data()['tID']}",
                   style: GoogleFonts.poppins(
                     color: FinColours.grey,
                     fontSize: 16,
@@ -77,8 +82,7 @@ class _ViewTicketScreenState extends State<ViewTicketScreen> {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  "Status : " +
-                      "${DummyData().tickets[widget.ticketID].tstatus}",
+                  "Status : ${widget.ticket.data()['tStatus']}",
                   style: GoogleFonts.poppins(
                     color: FinColours.grey,
                     fontSize: 16,
@@ -120,7 +124,7 @@ class _ViewTicketScreenState extends State<ViewTicketScreen> {
                               }, //dropdown background color
                               underline: Container(),
                               isExpanded: true,
-                              icon: Padding(
+                              icon: const Padding(
                                   padding: EdgeInsets.only(left: 0),
                                   child:
                                       Icon(Icons.keyboard_arrow_down_rounded)),
@@ -151,8 +155,8 @@ class _ViewTicketScreenState extends State<ViewTicketScreen> {
                     ),
                   ),
                   onPressed: () {
-                    DummyData().tickets[widget.ticketID].tstatus ==
-                        _updateStatusvalue;
+                    widget.ticket.reference
+                        .update({'tstatus': _updateStatusvalue});
                     Navigator.pop(context);
                   },
                 ),

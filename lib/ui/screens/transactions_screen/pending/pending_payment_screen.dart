@@ -1,6 +1,5 @@
 import 'package:finsem_org/ui/component/dummy.dart';
 import 'package:finsem_org/utils/colours.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,7 +13,7 @@ class PendingPaymentScreen extends StatelessWidget {
       color: FinColours.secondaryColor,
       child: Center(
         child: ListView.builder(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             itemCount: DummyData().paymentPending.length,
             itemBuilder: (BuildContext context, int index) {
               return Column(
@@ -44,7 +43,7 @@ class PendingPaymentScreen extends StatelessWidget {
                                 Text(
                                   //Name of sender
                                   DummyData().paymentPending[index].pName,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
@@ -91,7 +90,7 @@ class PendingPaymentScreen extends StatelessWidget {
                                 width: 80,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(18.0),
-                                    color: Color(0xffa22356)),
+                                    color: const Color(0xffa22356)),
                                 child: Center(
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -141,7 +140,7 @@ class PendingPaymentScreen extends StatelessWidget {
                                 width: 80,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(18.0),
-                                    color: Color(0xffa22356)),
+                                    color: const Color(0xffa22356)),
                                 child: Center(
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
