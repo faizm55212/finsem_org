@@ -40,4 +40,13 @@ class Api {
         .snapshots();
     return ticketSnap;
   }
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> fetchServices() {
+    var serviceSnap = _db
+        .collection('Organizations')
+        .doc('tw2TPyM4WQgbLJ3w4hxAfGnc9JE2')
+        .collection('Services')
+        .snapshots();
+    return serviceSnap;
+  }
 }
