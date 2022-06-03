@@ -135,7 +135,7 @@ class _AddServiceMenState extends State<AddServiceMen> {
   @override
   Widget build(BuildContext context) {
     return CurvedAppBar(
-      title: "Add User",
+      title: "Add Service Men",
       child: Scaffold(
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: false,
