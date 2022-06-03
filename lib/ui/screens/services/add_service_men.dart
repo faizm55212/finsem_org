@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finsem_org/ui/component/curved_appbar.dart';
 import 'package:finsem_org/utils/colours.dart';
 import 'package:flutter/material.dart';
@@ -102,10 +103,23 @@ class _AddServiceMenState extends State<AddServiceMen> {
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                   ),
                   child: const Text('OK'),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                    setState(() {});
+                  onPressed: () async {
+                    DocumentReference dr = FirebaseFirestore.instance
+                        .collection('Organizations')
+                        .doc('tw2TPyM4WQgbLJ3w4hxAfGnc9JE2')
+                        .collection('Services')
+                        .doc();
+                    await dr.set({
+                      "name": _name!.text,
+                      "prof": _occupation!.text,
+                      "mobile": _mobileNo!.text,
+                      "age": _age!.text,
+                      "gender": _genderValue,
+                      "uploadDate": DateTime.now().millisecondsSinceEpoch,
+                    }).then((value) {
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                    });
                   }, // so the alert dialog is closed when navigating back to main page
                 ),
               ],
@@ -126,6 +140,7 @@ class _AddServiceMenState extends State<AddServiceMen> {
   Widget build(BuildContext context) {
     return CurvedAppBar(
       title: "Add Service Men",
+
       child: Scaffold(
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: false,
