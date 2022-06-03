@@ -12,7 +12,6 @@ class Api {
         .doc('OU7N0lCaWVxbYssLmM19')
         .collection('Events')
         .get();
-    eventsSnap.docs;
     return eventsSnap.docs;
   }
 
@@ -32,5 +31,13 @@ class Api {
     TaskSnapshot taskSnapshot = await uploadTask;
     finalURL = await taskSnapshot.ref.getDownloadURL();
     return finalURL;
+  }
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> fetchTickets() {
+    var ticketSnap = _db
+        .collection('Issues')
+        .where('orgUid', isEqualTo: 'tw2TPyM4WQgbLJ3w4hxAfGnc9JE2')
+        .snapshots();
+    return ticketSnap;
   }
 }
