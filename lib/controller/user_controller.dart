@@ -15,7 +15,7 @@ class UserController extends GetxController {
   ).obs;
   static Rx<FirebaseUser> get loggedInUser => _loggedInUser;
 
-  static Future<void> init() async {
+  Future<void> init() async {
     var user = await Api.fetchUser(FirebaseAuth.instance.currentUser!.uid);
     _loggedInUser.value = FirebaseUser.fromFirebase(user);
   }

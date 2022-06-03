@@ -17,7 +17,7 @@ class Api {
 
   static Future<DocumentSnapshot<Map<String, dynamic>>> fetchUser(
       String uid) async {
-    var userSnap = await _db.collection('Users').doc(uid).get();
+    var userSnap = await _db.collection('Organizations').doc(uid).get();
     return userSnap;
   }
 
