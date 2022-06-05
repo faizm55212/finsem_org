@@ -54,7 +54,7 @@ class Api {
   static Stream<QuerySnapshot<Map<String, dynamic>>> fetchHousekeeping() {
     var serviceSnap = _db
         .collection('Organizations')
-        .doc('tw2TPyM4WQgbLJ3w4hxAfGnc9JE2')
+        .doc(UserController.loggedInUser.value.uid)
         .collection('Housekeeping')
         .snapshots();
     return serviceSnap;

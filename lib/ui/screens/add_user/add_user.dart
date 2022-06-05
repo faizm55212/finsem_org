@@ -159,8 +159,8 @@ class _AddUserState extends State<AddUser> {
                       'occupation': _occupation!.text,
                       'org': UserController.loggedInUser.value.name,
                       'oid': UserController.loggedInUser.value.uid,
-                      'monthly': 100,
-                      'pending': 15
+                      'monthly': 3500,
+                      'pending': 3500,
                     }).then((value) {
                       Fluttertoast.showToast(msg: value.data.toString());
                       Navigator.pop(context);

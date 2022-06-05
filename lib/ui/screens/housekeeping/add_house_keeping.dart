@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finsem_org/controller/user_controller.dart';
 import 'package:finsem_org/ui/component/curved_appbar.dart';
 import 'package:finsem_org/ui/screens/dashboard/dashboard.dart';
 import 'package:finsem_org/utils/colours.dart';
@@ -107,7 +108,7 @@ class _AddHousekeepingState extends State<AddHousekeeping> {
                   onPressed: () async {
                     DocumentReference dr = FirebaseFirestore.instance
                         .collection('Organizations')
-                        .doc('tw2TPyM4WQgbLJ3w4hxAfGnc9JE2')
+                        .doc(UserController.loggedInUser.value.uid)
                         .collection('Housekeeping')
                         .doc();
                     await dr.set({
