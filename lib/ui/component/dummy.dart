@@ -27,18 +27,18 @@ class DummyData {
   ].obs;
   RxList paymentHistory = [
     PaymentHistory(
-        senderName: "Dheeraj Gupta",
+        senderName: "Dhiraj Gupta",
         amount: "3500",
-        blockRoom: "Tower 4 - 903",
-        dateTime: "16/04/2022 10:43 AM",
+        blockRoom: "Tower 2 - 1402",
+        dateTime: "22/05/2022 10:43 AM",
         purpose: "Maintenance",
         trxID: "TX2317542353684422"),
     PaymentHistory(
-        senderName: "Sirajuddin Ahmed",
-        amount: "8000",
+        senderName: "Dhiraj Gupta",
+        amount: "500",
         blockRoom: "Tower 2 - 1402",
-        dateTime: "11/03/2022 09:15 AM",
-        purpose: "Donation",
+        dateTime: "11/05/2022 09:15 AM",
+        purpose: "Kavi Sammelan",
         trxID: "TX3428653678578224"),
     PaymentHistory(
         senderName: "Gautam Rishi",
@@ -49,7 +49,7 @@ class DummyData {
         trxID: "TX3127543698488243"),
     PaymentHistory(
         senderName: "Yashwanth HK",
-        amount: "2000",
+        amount: "3500",
         blockRoom: "Tower 1 - 201",
         dateTime: "12/03/2022 2:13 PM",
         purpose: "Donation",
@@ -58,28 +58,28 @@ class DummyData {
         senderName: "Faiz Khan",
         amount: "3500",
         blockRoom: "Tower 1 - 703",
-        dateTime: "23/04/2022 8:35 AM",
+        dateTime: "23/02/2022 8:35 AM",
         purpose: "Maintenance",
         trxID: "TX5578453678927450"),
     PaymentHistory(
         senderName: "Bhabya Sinha",
         amount: "4500",
         blockRoom: "Tower 3 - 402",
-        dateTime: "19/04/2022 1:27 PM",
+        dateTime: "19/02/2022 1:27 PM",
         purpose: "Maintenance",
         trxID: "TX5428453678499134"),
     PaymentHistory(
-        senderName: "Dheeraj Gupta",
+        senderName: "Dhiraj Gupta",
         amount: "3500",
         blockRoom: "Tower 4 - 903",
-        dateTime: "16/04/2022 10:43 AM",
+        dateTime: "16/02/2022 10:30 PM",
         purpose: "Maintenance",
         trxID: "TX2317542353684422"),
     PaymentHistory(
         senderName: "Tanweer Hussain",
         amount: "4500",
         blockRoom: "Tower 2 - 1502",
-        dateTime: "22/04/2022 09:18 AM",
+        dateTime: "10/02/2022 09:18 AM",
         purpose: "Maintenance",
         trxID: "TX1236541353553355"),
   ].obs;
@@ -123,12 +123,12 @@ class DummyData {
   ].obs;
   RxList paymentDonation = [
     PaymentDonation(
-      purpose: "Donation",
+      purpose: "Kavi Sammelan",
       blockRoom: "Tower 4 - 903",
-      number: "9614035474",
-      amount: "2000",
-      pName: "Dheeraj Gupta",
-      dateTime: "22/04/2022 09:28 AM",
+      number: "9926758761",
+      amount: "500",
+      pName: "Dhiraj Gupta",
+      dateTime: "10/05/2022 09:15 AM",
       trxID: "TX1236541353765029",
     ),
     PaymentDonation(

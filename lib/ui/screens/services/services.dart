@@ -79,9 +79,8 @@ class ServicesScreen extends StatelessWidget {
                                               ),
                                               Text(
                                                 //Type of Service
-                                                DummyData()
-                                                    .services[index]
-                                                    .profession,
+                                                snap.data!.docs[index]
+                                                    .data()['prof'],
                                                 style: TextStyle(
                                                     color: FinColours
                                                         .secondaryTextColor,
@@ -136,9 +135,8 @@ class ServicesScreen extends StatelessWidget {
                                                 onPressed: () async {
                                                   final Uri launchUri = Uri(
                                                     scheme: 'tel',
-                                                    path: DummyData()
-                                                        .services[index]
-                                                        .mobile,
+                                                    path: snap.data!.docs[index]
+                                                        .data()['mobile'],
                                                   );
                                                   await launchUrl(launchUri);
                                                 },

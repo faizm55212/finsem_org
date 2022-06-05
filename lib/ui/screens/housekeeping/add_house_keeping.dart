@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finsem_org/ui/component/curved_appbar.dart';
 import 'package:finsem_org/ui/screens/dashboard/dashboard.dart';
 import 'package:finsem_org/utils/colours.dart';
@@ -15,15 +16,15 @@ class _AddHousekeepingState extends State<AddHousekeeping> {
   TextEditingController? _name;
   TextEditingController? _age;
   TextEditingController? _mobileNo;
-  TextEditingController? _occupation;
-  TextEditingController? _email;
+  TextEditingController? _serviceDescription;
+  TextEditingController? _serviceType;
   @override
   void initState() {
     _name = TextEditingController();
     _age = TextEditingController();
     _mobileNo = TextEditingController();
-    _occupation = TextEditingController();
-    _email = TextEditingController();
+    _serviceDescription = TextEditingController();
+    _serviceType = TextEditingController();
     super.initState();
   }
 
@@ -32,8 +33,8 @@ class _AddHousekeepingState extends State<AddHousekeeping> {
     _name!.dispose();
     _age!.dispose();
     _mobileNo!.dispose();
-    _occupation!.dispose();
-    _email!.dispose();
+    _serviceDescription!.dispose();
+    _serviceType!.dispose();
     super.dispose();
   }
 
@@ -70,7 +71,7 @@ class _AddHousekeepingState extends State<AddHousekeeping> {
                 ),
                 Align(
                     alignment: Alignment.topLeft,
-                    child: Text("Service Type: " + _email!.text,
+                    child: Text("Service Type: " + _serviceType!.text,
                         style: const TextStyle(fontWeight: FontWeight.w700))),
                 const SizedBox(
                   height: 10,
@@ -80,7 +81,7 @@ class _AddHousekeepingState extends State<AddHousekeeping> {
                 ),
                 Align(
                     alignment: Alignment.topLeft,
-                    child: Text(_occupation!.text,
+                    child: Text(_serviceDescription!.text,
                         style: const TextStyle(fontWeight: FontWeight.w700))),
                 const SizedBox(
                   height: 10,
@@ -103,14 +104,24 @@ class _AddHousekeepingState extends State<AddHousekeeping> {
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                   ),
                   child: const Text('OK'),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Dashboard(),
-                      ),
-                    ); // Empty the form fields
-                    setState(() {});
+                  onPressed: () async {
+                    DocumentReference dr = FirebaseFirestore.instance
+                        .collection('Organizations')
+                        .doc('tw2TPyM4WQgbLJ3w4hxAfGnc9JE2')
+                        .collection('Housekeeping')
+                        .doc();
+                    await dr.set({
+                      "name": _name!.text,
+                      "serviceType": _serviceType!.text,
+                      "serviceDescription": _serviceDescription!.text,
+                      "mobile": _mobileNo!.text,
+                      "age": _age!.text,
+                      "gender": _genderValue,
+                      "uploadDate": DateTime.now().millisecondsSinceEpoch,
+                    }).then((value) {
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                    });
                   }, // so the alert dialog is closed when navigating back to main page
                 ),
               ],
@@ -233,7 +244,7 @@ class _AddHousekeepingState extends State<AddHousekeeping> {
                 height: 10.h,
               ),
               TextFormField(
-                controller: _email,
+                controller: _serviceType,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   labelText: "Service Type",
@@ -247,7 +258,7 @@ class _AddHousekeepingState extends State<AddHousekeeping> {
               ),
               SizedBox(
                 child: TextFormField(
-                  controller: _occupation,
+                  controller: _serviceDescription,
                   keyboardType: TextInputType.text,
                   textCapitalization: TextCapitalization.words,
                   decoration: InputDecoration(
