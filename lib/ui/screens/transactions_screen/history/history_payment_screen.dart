@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finsem_org/controller/api.dart';
 import 'package:finsem_org/ui/component/dummy.dart';
 import 'package:finsem_org/utils/colours.dart';
 import 'package:flutter/material.dart';
@@ -11,89 +13,96 @@ class HistoryPaymentScreen extends StatelessWidget {
     return Container(
       color: FinColours.secondaryColor,
       child: Center(
-        child: ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            itemCount: DummyData().paymentHistory.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Column(
-                children: [
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(18, 10, 18, 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: FinColours.transactionBackground4,
-                    ),
-                    height: 120,
-                    width: 300.w,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+        child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+            stream: Api.fetchPayments(),
+            builder: (context, snap) {
+              if (snap.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(color: Colors.black),
+                );
+              }
+              return ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: snap.data!.docs.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Column(
                       children: [
-                        //TODO:FIREBASE CONNECTION PAYMENT HISTORY
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              //Name of sender
-                              DummyData().paymentHistory[index].senderName,
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              //room
-                              DummyData().paymentHistory[index].blockRoom,
-                              style: TextStyle(
-                                  color: FinColours.secondaryTextColor,
-                                  fontSize: 14),
-                            ),
-                            Text(
-                              //purpose
-                              DummyData().paymentHistory[index].purpose,
-                              style: TextStyle(
-                                  color: FinColours.secondaryTextColor,
-                                  fontSize: 14),
-                            ),
-                            Text(
-                              //trx date
-                              DummyData().paymentHistory[index].dateTime,
-                              style: TextStyle(
-                                  color: FinColours.secondaryTextColor,
-                                  fontSize: 14),
-                            ),
-                            Text(
-                              //trx id
-                              DummyData().paymentHistory[index].trxID,
-                              style: TextStyle(
-                                  color: FinColours.secondaryTextColor,
-                                  fontSize: 14),
-                            ),
-                          ],
+                        const SizedBox(
+                          height: 5,
                         ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              DummyData().paymentHistory[index].amount,
-                              style: TextStyle(
-                                  color: FinColours.secondaryTextColor,
-                                  fontSize: 24),
-                            ),
-                          ],
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(18, 10, 18, 10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: FinColours.transactionBackground4,
+                          ),
+                          height: 120,
+                          width: 300.w,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    snap.data!.docs[index].data()['pName'],
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    snap.data!.docs[index].data()['tBlockRoom'],
+                                    style: TextStyle(
+                                        color: FinColours.secondaryTextColor,
+                                        fontSize: 14),
+                                  ),
+                                  Text(
+                                    snap.data!.docs[index].data()['tDesc'],
+                                    style: TextStyle(
+                                        color: FinColours.secondaryTextColor,
+                                        fontSize: 14),
+                                  ),
+                                  Text(
+                                    "${DateTime.fromMillisecondsSinceEpoch(snap.data!.docs[index].data()['time']).day}/${DateTime.fromMillisecondsSinceEpoch(snap.data!.docs[index].data()['time']).month}/${DateTime.fromMillisecondsSinceEpoch(snap.data!.docs[index].data()['time']).year}",
+                                    style: TextStyle(
+                                        color: FinColours.secondaryTextColor,
+                                        fontSize: 14),
+                                  ),
+                                  Text(
+                                    //trx id
+                                    snap.data!.docs[index].data()['tID'],
+                                    style: TextStyle(
+                                        color: FinColours.secondaryTextColor,
+                                        fontSize: 14),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    snap.data!.docs[index]
+                                        .data()['amount']
+                                        .toString(),
+                                    style: TextStyle(
+                                        color: FinColours.secondaryTextColor,
+                                        fontSize: 24),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
                         ),
                       ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                ],
-              );
+                    );
+                  });
             }),
       ),
     );
