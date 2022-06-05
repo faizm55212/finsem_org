@@ -118,7 +118,7 @@ class _AddServiceMenState extends State<AddServiceMen> {
                       "uploadDate": DateTime.now().millisecondsSinceEpoch,
                     }).then((value) {
                       Navigator.pop(context);
-                      Navigator.pop(context);
+                      //Navigator.pop(context);
                     });
                   }, // so the alert dialog is closed when navigating back to main page
                 ),
@@ -140,7 +140,6 @@ class _AddServiceMenState extends State<AddServiceMen> {
   Widget build(BuildContext context) {
     return CurvedAppBar(
       title: "Add Service Men",
-
       child: Scaffold(
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: false,

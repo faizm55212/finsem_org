@@ -82,7 +82,7 @@ class _ViewTicketScreenState extends State<ViewTicketScreen> {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  "Status : ${widget.ticket.data()['tStatus']}",
+                  "Status : ${widget.ticket.data()['tstatus']}",
                   style: GoogleFonts.poppins(
                     color: FinColours.grey,
                     fontSize: 16,

@@ -49,4 +49,13 @@ class Api {
         .snapshots();
     return serviceSnap;
   }
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> fetchHousekeeping() {
+    var serviceSnap = _db
+        .collection('Organizations')
+        .doc('tw2TPyM4WQgbLJ3w4hxAfGnc9JE2')
+        .collection('Housekeeping')
+        .snapshots();
+    return serviceSnap;
+  }
 }
