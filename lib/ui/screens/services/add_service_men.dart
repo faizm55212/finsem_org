@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finsem_org/controller/user_controller.dart';
 import 'package:finsem_org/ui/component/curved_appbar.dart';
 import 'package:finsem_org/utils/colours.dart';
 import 'package:flutter/material.dart';
@@ -106,7 +107,7 @@ class _AddServiceMenState extends State<AddServiceMen> {
                   onPressed: () async {
                     DocumentReference dr = FirebaseFirestore.instance
                         .collection('Organizations')
-                        .doc('tw2TPyM4WQgbLJ3w4hxAfGnc9JE2')
+                        .doc(UserController.loggedInUser.value.uid)
                         .collection('Services')
                         .doc();
                     await dr.set({

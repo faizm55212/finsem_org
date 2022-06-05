@@ -1,3 +1,4 @@
+import 'package:finsem_org/controller/user_controller.dart';
 import 'package:finsem_org/ui/component/curved_appbar.dart';
 import 'package:finsem_org/utils/colours.dart';
 import 'package:flutter/material.dart';
@@ -156,8 +157,8 @@ class _AddUserState extends State<AddUser> {
                       'idType': _idTypeValue,
                       'idNo': _idNo!.text,
                       'occupation': _occupation!.text,
-                      'org': 'Calc',
-                      'oid': 'OU7N0lCaWVxbYssLmM19',
+                      'org': UserController.loggedInUser.value.name,
+                      'oid': UserController.loggedInUser.value.uid,
                       'monthly': 100,
                       'pending': 15
                     }).then((value) {

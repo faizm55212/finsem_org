@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finsem_org/controller/user_controller.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as path;
 
@@ -9,7 +10,7 @@ class Api {
       fetchEvents() async {
     var eventsSnap = await _db
         .collection('Organizations')
-        .doc('OU7N0lCaWVxbYssLmM19')
+        .doc(UserController.loggedInUser.value.uid)
         .collection('Events')
         .get();
     return eventsSnap.docs;
@@ -36,7 +37,7 @@ class Api {
   static Stream<QuerySnapshot<Map<String, dynamic>>> fetchTickets() {
     var ticketSnap = _db
         .collection('Issues')
-        .where('orgUid', isEqualTo: 'tw2TPyM4WQgbLJ3w4hxAfGnc9JE2')
+        .where('orgUid', isEqualTo: UserController.loggedInUser.value.uid)
         .snapshots();
     return ticketSnap;
   }
@@ -44,7 +45,7 @@ class Api {
   static Stream<QuerySnapshot<Map<String, dynamic>>> fetchServices() {
     var serviceSnap = _db
         .collection('Organizations')
-        .doc('tw2TPyM4WQgbLJ3w4hxAfGnc9JE2')
+        .doc(UserController.loggedInUser.value.uid)
         .collection('Services')
         .snapshots();
     return serviceSnap;
